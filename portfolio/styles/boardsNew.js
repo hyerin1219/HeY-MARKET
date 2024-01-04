@@ -95,3 +95,10 @@ export const SendBtn = styled.button`
     border: none;
     cursor: pointer;
 `
+
+export const ErrorBox = styled.div`
+    height: 20px;
+    color : red;
+    padding : 5px;
+    margin: 5px 0;
+`

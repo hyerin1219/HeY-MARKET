@@ -1,4 +1,4 @@
-import { MainBox, Title,  InputWrap,  InputWrap2,  InputBox,  TextareaBox, AdressBox, AdressBtn, InputTit, FlexBox, FlexBox2, ImgBox, Label, SendBtn} from '../../../styles/boardsNew';
+import { MainBox, Title,  InputWrap,  InputWrap2,  InputBox,  TextareaBox, AdressBox, AdressBtn, InputTit, FlexBox, FlexBox2, ImgBox, Label, SendBtn, ErrorBox} from '../../../styles/boardsNew';
 
 import { useState } from "react"
 
@@ -41,22 +41,26 @@ export default function boardsNewPage() {
                     <InputWrap>
                         <InputTit>작성자</InputTit>
                         <InputBox  onChange={nameValue} placeholder='이름을 적어주세요.'></InputBox>
+                        <ErrorBox></ErrorBox>
                     </InputWrap>
                     
                     <InputWrap>
                         <InputTit>비밀번호</InputTit>
                         <InputBox  onChange={passwordValue} placeholder='비밀번호를 입력해주세요.'></InputBox>
+                        <ErrorBox></ErrorBox>
                     </InputWrap>
                 </FlexBox>
 
                 <InputWrap2>
                     <InputTit>제목</InputTit>
                     <InputBox  onChange={titleValue} placeholder='제목을 작성해주세요.'></InputBox>
+                    <ErrorBox></ErrorBox>
                 </InputWrap2>
 
                 <InputWrap2>
                     <InputTit>내용</InputTit>
                     <TextareaBox  onChange={boardValue} placeholder='내용을 작성해주세요.'></TextareaBox>
+                    <ErrorBox></ErrorBox>
                 </InputWrap2>
 
                 <InputTit>주소</InputTit>
