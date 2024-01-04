@@ -14,11 +14,11 @@ export const Title = styled.div`
 `
 export const InputWrap = styled.div`
     width: 49%;
-    margin: 15px 0;
+    margin: 10px 0;
 `
 export const InputWrap2 = styled.div`
     width: 100%;
-    margin: 15px 0;
+    margin: 10px 0;
 `
 export const InputBox = styled.input`
     box-sizing: border-box;
