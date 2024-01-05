@@ -8,26 +8,61 @@ export default function boardsNewPage() {
     const [password, setPassword] = useState("")
     const [title, setTitle] = useState("")
     const [board, setBoard] = useState("")
-    const [link, setLink] = useState("")
+
+    const [nameError, setNameError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+    const [titleError, setTitleError] = useState("")
+    const [boardError, setBoardError] = useState("")
+
 
     function nameValue(event) {
         setName(event.target.value)
+        if (event.target.value !== "") {
+            setNameError("")
+        }
     }
 
     function passwordValue(event) {
         setPassword(event.target.value)
+        if (event.target.value !== "") {
+            setPasswordError("")
+        }
     }
 
     function titleValue(event) {
         setTitle(event.target.value)
+        if (event.target.value !== "") {
+            setTitleError("")
+        }
     }
 
     function boardValue(event) {
         setBoard(event.target.value)
+        if (event.target.value !== "") {
+            setBoardError("")
+        }
     }
 
-    function linkValue(event) {
-        setLink(event.target.value)
+    const onClickSubmit = () => {
+        if (!name) {
+            setNameError("작성자를 입력해주세요.")
+        }
+
+        if (!password) {
+            setPasswordError("비밀번호를 입력해주세요.")
+        }
+
+        if (!title) {
+            setTitleError("제목을 입력해주세요.")
+        }
+
+        if (!board) {
+            setBoardError("내용을 입력해주세요.")
+        }
+
+        if (name  && password && title && board) {
+            alert("게시글이 등록되었습니다.")
+        }
     }
 
 
@@ -41,26 +76,26 @@ export default function boardsNewPage() {
                     <InputWrap>
                         <InputTit>작성자</InputTit>
                         <InputBox  onChange={nameValue} placeholder='이름을 적어주세요.'></InputBox>
-                        <ErrorBox></ErrorBox>
+                        <ErrorBox>{nameError}</ErrorBox>
                     </InputWrap>
                     
                     <InputWrap>
                         <InputTit>비밀번호</InputTit>
                         <InputBox  onChange={passwordValue} placeholder='비밀번호를 입력해주세요.'></InputBox>
-                        <ErrorBox></ErrorBox>
+                        <ErrorBox>{passwordError}</ErrorBox>
                     </InputWrap>
                 </FlexBox>
 
                 <InputWrap2>
                     <InputTit>제목</InputTit>
                     <InputBox  onChange={titleValue} placeholder='제목을 작성해주세요.'></InputBox>
-                    <ErrorBox></ErrorBox>
+                    <ErrorBox>{titleError}</ErrorBox>
                 </InputWrap2>
 
                 <InputWrap2>
                     <InputTit>내용</InputTit>
                     <TextareaBox  onChange={boardValue} placeholder='내용을 작성해주세요.'></TextareaBox>
-                    <ErrorBox></ErrorBox>
+                    <ErrorBox>{boardError}</ErrorBox>
                 </InputWrap2>
 
                 <InputTit>주소</InputTit>
@@ -78,7 +113,7 @@ export default function boardsNewPage() {
 
                 <InputWrap2>
                     <InputTit>유튜브</InputTit>
-                    <InputBox onChange={linkValue} placeholder='링크를 복사해주세요.'></InputBox>
+                    <InputBox placeholder='링크를 복사해주세요.'></InputBox>
                 </InputWrap2>
 
                 <InputWrap2>
@@ -108,7 +143,7 @@ export default function boardsNewPage() {
 
                 
                 <FlexBox2>
-                    <SendBtn>등록하기</SendBtn>
+                    <SendBtn onClick={onClickSubmit}>등록하기</SendBtn>
                 </FlexBox2>
 
 
