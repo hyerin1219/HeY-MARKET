@@ -1,24 +1,36 @@
 import { MainBox, Title,  InputWrap,  InputWrap2,  InputBox,  TextareaBox, AdressBox, AdressBtn, InputTit, FlexBox, FlexBox2, ImgBox, Label, SendBtn, ErrorBox} from '../../../styles/boardsNew';
-
 import { useState } from "react"
+import { useMutation, gql } from "@apollo/client"
+
+const CREATE_BOARD = gql`
+    mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(
+        createBoardInput: $CreateBoardInput
+    ) {
+        _id
+        number
+        message
+    }
+}
+`
 
 export default function boardsNewPage() {
 
-    const [name, setName] = useState("")
+    const [writer, setWriter] = useState("")
     const [password, setPassword] = useState("")
     const [title, setTitle] = useState("")
-    const [board, setBoard] = useState("")
+    const [contents, setContents] = useState("")
 
-    const [nameError, setNameError] = useState("")
+    const [writerError, setWriterError] = useState("")
     const [passwordError, setPasswordError] = useState("")
     const [titleError, setTitleError] = useState("")
-    const [boardError, setBoardError] = useState("")
+    const [contentsError, setContentsError] = useState("")
 
 
-    function nameValue(event) {
-        setName(event.target.value)
+    function writerValue(event) {
+        setWriter(event.target.value)
         if (event.target.value !== "") {
-            setNameError("")
+            setWriterError("")
         }
     }
 
@@ -36,16 +48,18 @@ export default function boardsNewPage() {
         }
     }
 
-    function boardValue(event) {
+    function contentsValue(event) {
         setBoard(event.target.value)
         if (event.target.value !== "") {
-            setBoardError("")
+            setContentsError("")
         }
     }
 
-    const onClickSubmit = () => {
-        if (!name) {
-            setNameError("작성자를 입력해주세요.")
+    const [create_board] = useMutation(CREATE_BOARD)
+
+    const onClickSubmit = async () => {
+        if (!writer) {
+            setWriterError("작성자를 입력해주세요.")
         }
 
         if (!password) {
@@ -56,12 +70,24 @@ export default function boardsNewPage() {
             setTitleError("제목을 입력해주세요.")
         }
 
-        if (!board) {
-            setBoardError("내용을 입력해주세요.")
+        if (!contents) {
+            setContentsError("내용을 입력해주세요.")
         }
 
-        if (name  && password && title && board) {
+        if (writer  && password && title && contents) {
             alert("게시글이 등록되었습니다.")
+
+            const result = await create_board({
+                variables: {
+                    createBoardInput: {
+                        writer, //key와 value가 같으면 value는 생략 가능
+                        password,
+                        title,
+                        contents
+                    }
+                }
+            })
+            console.log(result)
         }
     }
 
@@ -75,8 +101,8 @@ export default function boardsNewPage() {
                     
                     <InputWrap>
                         <InputTit>작성자</InputTit>
-                        <InputBox  onChange={nameValue} placeholder='이름을 적어주세요.'></InputBox>
-                        <ErrorBox>{nameError}</ErrorBox>
+                        <InputBox  onChange={writerValue} placeholder='이름을 적어주세요.'></InputBox>
+                        <ErrorBox>{writerError}</ErrorBox>
                     </InputWrap>
                     
                     <InputWrap>
@@ -94,8 +120,8 @@ export default function boardsNewPage() {
 
                 <InputWrap2>
                     <InputTit>내용</InputTit>
-                    <TextareaBox  onChange={boardValue} placeholder='내용을 작성해주세요.'></TextareaBox>
-                    <ErrorBox>{boardError}</ErrorBox>
+                    <TextareaBox  onChange={contentsValue} placeholder='내용을 작성해주세요.'></TextareaBox>
+                    <ErrorBox>{contentsError}</ErrorBox>
                 </InputWrap2>
 
                 <InputTit>주소</InputTit>
