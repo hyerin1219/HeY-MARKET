@@ -49,7 +49,7 @@ export default function boardsNewPage() {
     }
 
     function contentsValue(event) {
-        setBoard(event.target.value)
+        setContents(event.target.value)
         if (event.target.value !== "") {
             setContentsError("")
         }
