@@ -1,30 +1,30 @@
 import { MainBox, Title,  InputWrap,  InputWrap2,  InputBox,  TextareaBox, AdressBox, AdressBtn, InputTit, FlexBox, FlexBox2, ImgBox, Label, SendBtn, ErrorBox} from '../../../styles/boardsNew';
 import { useState } from "react"
 import { useMutation, gql } from "@apollo/client"
+import { useRouter } from 'next/router';
 
 const CREATE_BOARD = gql`
-    mutation createBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(
-        createBoardInput: $CreateBoardInput
-    ) {
-        _id
-        number
-        message
+    mutation createBoard($createBoardInput: CreateBoardInput!){
+        createBoard(createBoardInput: $createBoardInput){
+            _id
+        }
     }
-}
 `
 
 export default function boardsNewPage() {
+    const router = useRouter()
 
-    const [writer, setWriter] = useState("")
-    const [password, setPassword] = useState("")
-    const [title, setTitle] = useState("")
-    const [contents, setContents] = useState("")
+    const [writer, setWriter] = useState("");
+    const [password, setPassword] = useState("");
+    const [title, setTitle] = useState("");
+    const [contents, setContents] = useState("");
 
-    const [writerError, setWriterError] = useState("")
-    const [passwordError, setPasswordError] = useState("")
-    const [titleError, setTitleError] = useState("")
-    const [contentsError, setContentsError] = useState("")
+    const [writerError, setWriterError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [titleError, setTitleError] = useState("");
+    const [contentsError, setContentsError] = useState("");
+
+    const [createBoard] = useMutation(CREATE_BOARD)
 
 
     function writerValue(event) {
@@ -54,9 +54,7 @@ export default function boardsNewPage() {
             setContentsError("")
         }
     }
-
-    const [create_board] = useMutation(CREATE_BOARD)
-
+    
     const onClickSubmit = async () => {
         if (!writer) {
             setWriterError("작성자를 입력해주세요.")
@@ -74,20 +72,24 @@ export default function boardsNewPage() {
             setContentsError("내용을 입력해주세요.")
         }
 
-        if (writer  && password && title && contents) {
-            alert("게시글이 등록되었습니다.")
-
-            const result = await create_board({
-                variables: {
-                    createBoardInput: {
-                        writer, //key와 value가 같으면 value는 생략 가능
+        if (writer && password && title && contents) {
+            
+            try {
+                const result = await createBoard({
+                    variables: {
+                        createBoardInput: {
+                        writer,
                         password,
                         title,
                         contents
+                        }
                     }
+                    })
+                    console.log(result.data.createBoard._id)
+                    router.push(`/boards/${result.data.createBoard._id}`)
+                } catch(error) {
+                    alert(error.message)
                 }
-            })
-            console.log(result)
         }
     }
 
