@@ -38,7 +38,7 @@ export default function  BoardDetailPage() {
                         <ProfileImg src='/profile.png'></ProfileImg>
                         <NameBox>
                             <ProfileName >{data?.fetchBoard?.writer}</ProfileName>
-                            <Date ></Date>
+                            <Date>{data?.fetchBoard?.createdAt}</Date>
                         </NameBox>
                     </FlexBox2>
                     <FlexBox2>
@@ -49,18 +49,18 @@ export default function  BoardDetailPage() {
 
                 <Line></Line>
 
-                <BoardTitle ></BoardTitle>
-                <BoardContent ></BoardContent>
+                <BoardTitle >{data?.fetchBoard?.title}</BoardTitle>
+                <BoardContent >{data?.fetchBoard?.contents}</BoardContent>
 
                 
                 <LikeWrap>
                     <LikeBox>
                         <LikeImg src='/up.png'></LikeImg>
-                        <LikeText ></LikeText>
+                        <LikeText>{data?.fetchBoard?.likeCount}</LikeText>
                     </LikeBox>
                     <LikeBox>
                         <LikeImg src='/down.png'></LikeImg>
-                        <UNLikeText>00</UNLikeText>
+                        <UNLikeText>{data?.fetchBoard?.dislikeCount}</UNLikeText>
                     </LikeBox>
                 </LikeWrap>
             </MainBox>
