@@ -10,7 +10,7 @@ export default function App({ Component}) {
 
   return (
     <ApolloProvider client={client}>
-        <Component/>
+        <Component />
     </ApolloProvider>
     
   )
