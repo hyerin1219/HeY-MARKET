@@ -5,7 +5,7 @@ import  BoardWriteUI from './BoardWrite.presenter'
 
 import {CREATE_BOARD} from './BoardsWrite.queries'
 
-export default function BoardWrite() {
+export default function BoardWrite(props) {
 
     const router = useRouter()
 
@@ -21,11 +21,16 @@ export default function BoardWrite() {
 
     const [createBoard] = useMutation(CREATE_BOARD)
 
+    const [isActive, setIsActive] = useState(false)
+
 
     function writerValue(event) {
         setWriter(event.target.value)
         if (event.target.value !== "") {
             setWriterError("")
+        }
+        if( event.target.valuer && password && title && contents ) {
+            setIsActive(true)
         }
     }
 
@@ -34,6 +39,10 @@ export default function BoardWrite() {
         if (event.target.value !== "") {
             setPasswordError("")
         }
+
+        if( writer &&event.target.value && title && contents ) {
+            setIsActive(true)
+        }
     }
 
     function titleValue(event) {
@@ -41,12 +50,20 @@ export default function BoardWrite() {
         if (event.target.value !== "") {
             setTitleError("")
         }
+
+        if( writer && password && event.target.value && contents ) {
+            setIsActive(true)
+        }
     }
 
     function contentsValue(event) {
         setContents(event.target.value)
         if (event.target.value !== "") {
             setContentsError("")
+        }
+
+        if( writer && password && title && event.target.value ) {
+            setIsActive(true)
         }
     }
     
@@ -99,6 +116,7 @@ export default function BoardWrite() {
         passwordError={passwordError}
         titleError={titleError}
         contentsError={contentsError}
+        isActive={isActive}
         />
 
     )
