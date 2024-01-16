@@ -1,6 +1,6 @@
-import { useQuery } from "@apollo/client"
+import { useQuery, useMutation } from "@apollo/client"
 import { useRouter } from 'next/router';
-import {FETCH_BOARD} from './BoardsDetail.queries'
+import {FETCH_BOARD, DELETE_BOARD} from './BoardsDetail.queries'
 import BoardDetailUI from "./BoardsDetail.presenter";
 
 export default function BoardDetail() {
@@ -13,7 +13,25 @@ export default function BoardDetail() {
         }
     })
 
+    const [deleteBoard] = useMutation(DELETE_BOARD)
+
+    const onClickDeleteBoard = (event) => {
+        deleteBoard({
+            variables: {boardId: event.target.id}
+        })
+        router.push(`/boards/`)
+    }
+
+    const onClickList = () => {
+        router.push(`/boards/`)
+    }
+    
+
     return(
-        <BoardDetailUI data={data}/>
+        <BoardDetailUI
+            data={data}
+            onClickDeleteBoard={onClickDeleteBoard}
+            onClickList={onClickList}
+         />
     )
 }

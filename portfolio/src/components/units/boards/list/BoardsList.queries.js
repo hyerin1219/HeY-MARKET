@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
+import { gql } from "@apollo/client"
 
 export const FETCH_BOARDS = gql`
-    mutation fetchBoards {
+    query fetchBoards {
         fetchBoards {
             _id
             writer

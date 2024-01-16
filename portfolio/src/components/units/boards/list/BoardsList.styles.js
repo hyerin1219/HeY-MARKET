@@ -11,9 +11,9 @@ export const TableBox = styled.div`
 `
 
 export const ListTr = styled.tr`
+    display: inline-block;
     border-bottom: 1px solid #ddd;
-    padding: 0 10px;
-
+    padding: 10px 0;
 `
 
 export const ListThNumber = styled.th`
@@ -28,6 +28,14 @@ export const ListThTitle = styled.th`
     font-weight: 500;
     font-size: 18px;
     width: 700px;
+`
+
+export const ListThTitleClick = styled.th`
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    width: 700px;
+    cursor: pointer;
 `
 
 export const ListTh= styled.th`

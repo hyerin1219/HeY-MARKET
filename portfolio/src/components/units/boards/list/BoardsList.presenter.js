@@ -1,4 +1,5 @@
-import * as A from '../list/BoardsList.styles' 
+import * as A from '../list/BoardsList.styles'
+import { getDate } from '../../../commons/libraries/utils' 
 
 export default function BoardListUI(props) {
 
@@ -14,11 +15,20 @@ export default function BoardListUI(props) {
                                 <A.ListTh>작성자</A.ListTh>
                                 <A.ListTh>날짜</A.ListTh>
                             </A.ListTr>
+
+                            {props.data?.fetchBoards.map(el => (
+                                <A.ListTr key={el.id}>
+                                    <A.ListThNumber>{String(el._id.slice(-4))}</A.ListThNumber>
+                                    <A.ListThTitleClick id={el._id} onClick={props.onClickDetail}>{el.title}</A.ListThTitleClick>
+                                    <A.ListTh>{el.writer}</A.ListTh>
+                                    <A.ListTh>{getDate(el.createdAt)}</A.ListTh>
+                                </A.ListTr>
+                            ))}
                         </tbody>
                     </table>
                 </A.TableBox>
 
-                <A.CreateButton onClick={props.onClickMoveToBoardNew}>
+                <A.CreateButton onClick={props.onClickNewBoards}>
                     <A.ButtonImg src='/images/pencil.png'></A.ButtonImg>
                     게시물 등록하기
                 </A.CreateButton>

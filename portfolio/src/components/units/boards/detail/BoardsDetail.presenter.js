@@ -39,9 +39,9 @@ export default function BoardDetailUI(props) {
             </MainBox>
 
             <ListButtonBox>
-                <ListButton2>목록으로</ListButton2>
-                <ListButton>수정하기</ListButton>
-                <ListButton2>삭제하기</ListButton2>
+                <ListButton2 onClick={props.onClickList}>목록으로</ListButton2>
+                <ListButton >수정하기</ListButton>
+                <ListButton2 id={props.data?.fetchBoard?._id} onClick={props.onClickDeleteBoard}>삭제하기</ListButton2>
             </ListButtonBox>
         </Wrap>
 

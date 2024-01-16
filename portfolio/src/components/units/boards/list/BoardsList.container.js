@@ -1,27 +1,27 @@
-import { useQuery } from "@apollo/client"
-import { useRouter } from "next/router"
-import { FETCH_BOARDS } from "./BoardsList.queries"
 import BoardListUI from "./BoardsList.presenter"
-
+import { useQuery } from "@apollo/client"
+import { FETCH_BOARDS } from "./BoardsList.queries"
+import { useRouter } from "next/router"
 
 export default function BoardList() {
 
+    const { data } = useQuery(FETCH_BOARDS)
     const router = useRouter()
-    const {data} = useQuery(FETCH_BOARDS)
 
-    const onClickMoveToBoardNew = () => {
-        router.push("/boards/new");
-    };
-
-    const onClickBoardDetail = (event) => {
+    const onClickDetail = (event) => {
         router.push(`/boards/${event.target.id}`)
+        console.log(event.target.id)
     }
-    
+
+    const onClickNewBoards = () => {
+        router.push(`/boards/new`)
+    }
+
     return (
-        <BoardListUI
+        <BoardListUI 
         data={data}
-        onClickBoardDetail={onClickBoardDetail}
-        onClickMoveToBoardNew={onClickMoveToBoardNew}
+        onClickNewBoards={onClickNewBoards}
+        onClickDetail={onClickDetail}
         />
     )
 }

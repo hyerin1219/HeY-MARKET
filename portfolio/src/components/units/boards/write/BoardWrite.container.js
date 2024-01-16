@@ -31,6 +31,8 @@ export default function BoardWrite(props) {
         }
         if( event.target.valuer && password && title && contents ) {
             setIsActive(true)
+        } else {
+            setIsActive(false)
         }
     }
 
@@ -42,6 +44,8 @@ export default function BoardWrite(props) {
 
         if( writer &&event.target.value && title && contents ) {
             setIsActive(true)
+        } else {
+            setIsActive(false)
         }
     }
 
@@ -53,6 +57,8 @@ export default function BoardWrite(props) {
 
         if( writer && password && event.target.value && contents ) {
             setIsActive(true)
+        } else {
+            setIsActive(false)
         }
     }
 
@@ -64,6 +70,8 @@ export default function BoardWrite(props) {
 
         if( writer && password && title && event.target.value ) {
             setIsActive(true)
+        } else {
+            setIsActive(false)
         }
     }
     
