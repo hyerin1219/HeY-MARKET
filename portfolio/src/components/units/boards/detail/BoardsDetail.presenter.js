@@ -1,49 +1,77 @@
 import {MainBox, FlexBox2} from '../write/BoardWrite.styles';
-import {ListButton2, Wrap, ListButtonBox, ListButton,LikeBox,LikeWrap, CenterBox, ProfileImg, ProfileName, Date, YellowImg, Line, BoardTitle, NameBox, BoardContent, LikeImg, LikeText, UNLikeText} from './BoardsDetail.styles';
+import * as A from './BoardsDetail.styles';
+import { getDate } from '../../../commons/libraries/utils'
 
 export default function BoardDetailUI(props) {
 
     return (
-        <Wrap>
+        <A.Wrap>
             <MainBox>
-                <CenterBox>
+                <A.CenterBox>
                     <FlexBox2>
-                        <ProfileImg src='/images/profile.png'></ProfileImg>
-                        <NameBox>
-                            <ProfileName >{props.data?.fetchBoard?.writer}</ProfileName>
-                            <Date>{props.data?.fetchBoard?.createdAt}</Date>
-                        </NameBox>
+                        <A.ProfileImg src='/images/profile.png'></A.ProfileImg>
+                        <A.NameBox>
+                            <A.ProfileName >{props.data?.fetchBoard?.writer}</A.ProfileName>
+                            <A.Date>{getDate(props.data?.fetchBoard?.createdAt)}</A.Date>
+                        </A.NameBox>
                     </FlexBox2>
                     <FlexBox2>
-                        <YellowImg src='/images/link.png'></YellowImg>
-                        <YellowImg  src='/images/location.png'></YellowImg>
+                        <A.YellowImg src='/images/link.png'></A.YellowImg>
+                        <A.YellowImg  src='/images/location.png'></A.YellowImg>
                     </FlexBox2>
-                </CenterBox>
+                </A.CenterBox>
 
-                <Line></Line>
+                <A.Line></A.Line>
 
-                <BoardTitle >{props.data?.fetchBoard?.title}</BoardTitle>
-                <BoardContent >{props.data?.fetchBoard?.contents}</BoardContent>
+                <A.BoardTitle >{props.data?.fetchBoard?.title}</A.BoardTitle>
+                <A.BoardContent >{props.data?.fetchBoard?.contents}</A.BoardContent>
 
                 
-                <LikeWrap>
-                    <LikeBox>
-                        <LikeImg src='/images/up.png'></LikeImg>
-                        <LikeText>{props.data?.fetchBoard?.likeCount}</LikeText>
-                    </LikeBox>
-                    <LikeBox>
-                        <LikeImg src='/images/down.png'></LikeImg>
-                        <UNLikeText>{props.data?.fetchBoard?.dislikeCount}</UNLikeText>
-                    </LikeBox>
-                </LikeWrap>
+                <A.LikeWrap>
+                    <A.LikeBox>
+                        <A.LikeImg src='/images/up.png'></A.LikeImg>
+                        <A.LikeText>{props.data?.fetchBoard?.likeCount}</A.LikeText>
+                    </A.LikeBox>
+                    <A.LikeBox>
+                        <A.LikeImg src='/images/down.png'></A.LikeImg>
+                        <A.UNLikeText>{props.data?.fetchBoard?.dislikeCount}</A.UNLikeText>
+                    </A.LikeBox>
+                </A.LikeWrap>
             </MainBox>
 
-            <ListButtonBox>
-                <ListButton2 onClick={props.onClickList}>목록으로</ListButton2>
-                <ListButton >수정하기</ListButton>
-                <ListButton2 id={props.data?.fetchBoard?._id} onClick={props.onClickDeleteBoard}>삭제하기</ListButton2>
-            </ListButtonBox>
-        </Wrap>
+            <A.ListButtonBox>
+                <A.ListButton2 onClick={props.onClickList}>목록으로</A.ListButton2>
+                <A.ListButton onClick={props.onClickEditBoard} >수정하기</A.ListButton>
+                <A.ListButton2 id={props.data?.fetchBoard?._id} onClick={props.onClickDeleteBoard}>삭제하기</A.ListButton2>
+            </A.ListButtonBox>
+
+            <A.Line2></A.Line2>
+
+            <A.CommentTitleBox>
+                <A.CommentTitle>
+                    <A.CommentImg src='/images/comment.png'></A.CommentImg>
+                    댓글
+                </A.CommentTitle>
+            </A.CommentTitleBox>
+
+            <A.StarBox>
+                <A.CommentImg src='/images/gray_star.png'></A.CommentImg>
+                <A.CommentImg src='/images/gray_star.png'></A.CommentImg>
+                <A.CommentImg src='/images/gray_star.png'></A.CommentImg>
+                <A.CommentImg src='/images/gray_star.png'></A.CommentImg>
+                <A.CommentImg src='/images/gray_star.png'></A.CommentImg>
+            </A.StarBox>
+
+            <A.CommentInputBox>
+                <A.CommentInput placeholder='개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다.' maxlength="100"></A.CommentInput>
+            </A.CommentInputBox>
+            <A.CommentUnderBox>
+                <A.CommentNumber>0</A.CommentNumber>
+                <A.CommentNumber>/</A.CommentNumber>
+                <A.CommentNumber>100</A.CommentNumber>
+                <A.CommentSubmitButton>등록하기</A.CommentSubmitButton>
+            </A.CommentUnderBox>
+        </A.Wrap>
 
 
     )

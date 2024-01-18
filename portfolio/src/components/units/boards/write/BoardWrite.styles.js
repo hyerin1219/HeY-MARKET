@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 export const MainBox = styled.div`
+    box-sizing: border-box;
     width: 1200px;
     padding: 50px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2)

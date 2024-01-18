@@ -10,7 +10,6 @@ export default function BoardList() {
 
     const onClickDetail = (event) => {
         router.push(`/boards/${event.target.id}`)
-        console.log(event.target.id)
     }
 
     const onClickNewBoards = () => {

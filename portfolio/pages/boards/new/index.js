@@ -3,6 +3,8 @@ import  BoardWrite from '../../../src/components/units/boards/write/BoardWrite.c
 export default function boardsNewPage() {
 
     return (
-        <BoardWrite />
+        <BoardWrite 
+        isEdit={false}
+        />
     )
 }

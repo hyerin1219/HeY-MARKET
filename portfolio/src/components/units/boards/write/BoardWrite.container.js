@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client"
 import { useRouter } from 'next/router';
 import  BoardWriteUI from './BoardWrite.presenter'
 
-import {CREATE_BOARD} from './BoardsWrite.queries'
+import {CREATE_BOARD, UPDATE_BOARD } from './BoardsWrite.queries'
 
 export default function BoardWrite(props) {
 
@@ -20,6 +20,7 @@ export default function BoardWrite(props) {
     const [contentsError, setContentsError] = useState("");
 
     const [createBoard] = useMutation(CREATE_BOARD)
+    const [updateBoard] = useMutation(UPDATE_BOARD)
 
     const [isActive, setIsActive] = useState(false)
 
@@ -105,12 +106,33 @@ export default function BoardWrite(props) {
                         }
                     }
                     })
-                    console.log(result.data.createBoard._id)
+                    // console.log(result.data.createBoard._id)
                     router.push(`/boards/${result.data.createBoard._id}`)
             } catch(error) {
                 alert(error.message)
             }
         }
+    }
+
+    const onClickEdit = async () => {
+        
+        try {
+            const myVariables = {}
+            if(title) {myVariables.title = title}
+            if(contents) {myVariables.contents = contents}
+            const result = await updateBoard( {
+                variables: {
+                    boardId: router.query.boardId,
+                    password,
+                    updateBoardInput: myVariables
+                }
+            })
+    
+            router.push(`/boards/${result.data.updateBoard._id}`)
+        } catch(error) {
+            alert(error.message)
+        }
+        
     }
 
     return (
@@ -120,11 +142,14 @@ export default function BoardWrite(props) {
         titleValue={titleValue}
         contentsValue={contentsValue}
         onClickSubmit={onClickSubmit}
+        onClickEdit={onClickEdit}
         writerError={writerError}
         passwordError={passwordError}
         titleError={titleError}
         contentsError={contentsError}
         isActive={isActive}
+        isEdit={props.isEdit}
+        data={props.data}
         />
 
     )

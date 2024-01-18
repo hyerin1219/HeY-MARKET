@@ -7,13 +7,13 @@ export default function BoardWriteUI(props) {
 
         <div>
             <MainBox>
-                <Title>게시물 등록</Title>
+                <Title>게시물 {props.isEdit ? "수정" : "등록"}</Title>
 
                 <FlexBox>
                     
                     <InputWrap>
                         <InputTit>작성자</InputTit>
-                        <InputBox  onChange={props.writerValue} placeholder='이름을 적어주세요.'></InputBox>
+                        <InputBox  onChange={props.writerValue} placeholder='이름을 적어주세요.' defaultValue={props.data ? props.data.fetchBoard.writer : ""}></InputBox>
                         <ErrorBox>{props.writerError}</ErrorBox>
                     </InputWrap>
                     
@@ -26,13 +26,13 @@ export default function BoardWriteUI(props) {
 
                 <InputWrap2>
                     <InputTit>제목</InputTit>
-                    <InputBox  onChange={props.titleValue} placeholder='제목을 작성해주세요.'></InputBox>
+                    <InputBox  onChange={props.titleValue} placeholder='제목을 작성해주세요.' defaultValue={props.data ? props.data.fetchBoard.title : ""}></InputBox>
                     <ErrorBox>{props.titleError}</ErrorBox>
                 </InputWrap2>
 
                 <InputWrap2>
                     <InputTit>내용</InputTit>
-                    <TextareaBox  onChange={props.contentsValue} placeholder='내용을 작성해주세요.'></TextareaBox>
+                    <TextareaBox  onChange={props.contentsValue} placeholder='내용을 작성해주세요.' defaultValue={props.data ? props.data.fetchBoard.contents : ""}></TextareaBox>
                     <ErrorBox>{props.contentsError}</ErrorBox>
                 </InputWrap2>
 
@@ -82,8 +82,8 @@ export default function BoardWriteUI(props) {
                 
                 <FlexBox2>
                     <SendBtn 
-                    onClick={props.onClickSubmit}
-                    isActive={props.isActive}>등록하기</SendBtn>
+                    onClick={ props.isEdit ? props.onClickEdit : props.onClickSubmit}
+                    isActive={props.isActive}>{props.isEdit ? "수정" : "등록"}하기</SendBtn>
                 </FlexBox2>
 
 
