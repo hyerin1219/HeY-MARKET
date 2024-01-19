@@ -1,20 +1,42 @@
 import styled from "@emotion/styled";
 
-export const CommentTitle = styled.div`
+export const CommentListBox = styled.div`
     display: flex;
-    margin-right: auto;
-` 
+    justify-content: space-between;
+    width: 100%;
+    height: 120px;
+    margin: 20px 0 20px;
+    border-bottom: 1px solid #ddd;
+`
 
-export const Line2 = styled.div`
-    width: 1200px;
-    height: 1px;
-    background-color: #ddd;
-` 
+export const CommentProfileImg = styled.img`
+    width: 48px;
+    height: 48px;
+    margin: 5px;
+`
 
-export const CommentTitleBox = styled.div`
+export const CommentProfileBox = styled.div`
     display: flex;
-    justify-content: center;
-    margin: 35px 0;
+    flex-direction: column;
+`
+export const CommentProfileName = styled.div`
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 20px;
+`
+
+export const CommentContents = styled.div`
+    width: 1050px;
+    height: 55px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 5px 0;
+`
+
+export const CommentCreateDate = styled.div`
+    font-size: 12px;
+    font-weight: 400;
+    color: #BDBDBD;
 `
 
 export const CommentImg = styled.img`
@@ -27,48 +49,4 @@ export const CommentImg = styled.img`
 
 export const StarBox = styled.div`
     display: flex;
-    align-items: center;
-`
-
-export const CommentInputBox = styled.div`
-    width: 100%;
-    height: 150px;
-    border: 1px solid #ddd;
-    margin: 20px 0 0;
-`
-
-export const CommentInput = styled.textarea`
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    resize: none;
-
-`
-export const CommentUnderBox = styled.div`
-    position: relative;
-    width: 100%;
-    height: 52px;
-    border: 1px solid #ddd;
-    border-top: none;
-    padding: 0 10px;
-    box-sizing: border-box;
-`
-export const CommentNumber = styled.span`
-    color: #ddd;
-    font-size: 16px;
-    line-height: 52px;
-`
-
-export const CommentSubmitButton = styled.button`
-    position: absolute;
-    bottom: 0;
-    right: -4px;
-    width: 91px;
-    height: 52px;
-    background-color: #000;
-    color: #fff;
-    cursor: pointer;
 `
