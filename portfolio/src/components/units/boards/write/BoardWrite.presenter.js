@@ -83,7 +83,7 @@ export default function BoardWriteUI(props) {
                 <FlexBox2>
                     <SendBtn 
                     onClick={ props.isEdit ? props.onClickEdit : props.onClickSubmit}
-                    isActive={props.isActive}>{props.isEdit ? "수정" : "등록"}하기</SendBtn>
+                    isActive={ props.isEdit ? true : props.isActive}>{props.isEdit ? "수정" : "등록"}하기</SendBtn>
                 </FlexBox2>
 
 
