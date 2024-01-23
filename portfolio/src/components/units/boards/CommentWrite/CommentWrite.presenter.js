@@ -35,7 +35,7 @@ export default function BoardsCommentWriteUI(props) {
                 <A.CommentNumber>0</A.CommentNumber>
                 <A.CommentNumber>/</A.CommentNumber>
                 <A.CommentNumber>100</A.CommentNumber>
-                <A.CommentSubmitButton onClick={props.onClickCommentSubmit}>{props.isEdit ? "수정" : "등록"}하기</A.CommentSubmitButton>
+                <A.CommentSubmitButton onClick={props.onClickCommentSubmit}>등록하기</A.CommentSubmitButton>
             </A.CommentUnderBox>
         </MainBox>
     )

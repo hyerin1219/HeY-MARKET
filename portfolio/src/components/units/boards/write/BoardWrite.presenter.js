@@ -13,7 +13,7 @@ export default function BoardWriteUI(props) {
                     
                     <InputWrap>
                         <InputTit>작성자</InputTit>
-                        <InputBox  onChange={props.writerValue} placeholder='이름을 적어주세요.' defaultValue={props.data ? props.data.fetchBoard.writer : ""}></InputBox>
+                        <InputBox  onChange={props.writerValue} placeholder='이름을 적어주세요.' defaultValue={props.data ? props.data.fetchBoard.writer : ""} readOnly={props.data?.fetchBoard.writer}></InputBox>
                         <ErrorBox>{props.writerError}</ErrorBox>
                     </InputWrap>
                     

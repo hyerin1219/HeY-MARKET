@@ -68,7 +68,6 @@ export default function BoardsCommentWrite(props) {
         onChangeWriter={onChangeWriter}
         onChangPassword={onChangPassword}
         onClickCommentSubmit={onClickCommentSubmit}
-        isEdit={props.isEdit}
         />
     )
 }

@@ -68,8 +68,8 @@ export const CommentSubmitButton = styled.button`
     right: -4px;
     width: 91px;
     height: 52px;
-    background-color: ${(props) => props.isEdit ? "#000000" : "#FFD600"};
-    color: ${(props) => props.isEdit ? "#ffffff" : "#000000"};
+    background-color: #000;
+    color: #fff;
     cursor: pointer;
 `
 
