@@ -1,14 +1,13 @@
 import * as A from './BoardsList.styles'
 import { getDate } from '../../../commons/libraries/utils' 
+import { IBoardListUIProps } from './BoardsList.types'
 
-export default function BoardListUI(props) {
+export default function BoardListUI(props:IBoardListUIProps) {
 
 
     return (
         <A.MainBox>
                 <A.TableBox>
-                    <table>
-                        <tbody>
                             <A.ListTr>
                                 <A.ListThNumber>번호</A.ListThNumber>
                                 <A.ListThTitle>제목</A.ListThTitle>
@@ -17,15 +16,13 @@ export default function BoardListUI(props) {
                             </A.ListTr>
 
                             {props.data?.fetchBoards.map(el => (
-                                <A.ListTr key={el.id}>
+                                <A.ListTr key={el._id}>
                                     <A.ListThNumber>{String(el._id.slice(-4))}</A.ListThNumber>
                                     <A.ListThTitleClick id={el._id} onClick={props.onClickDetail}>{el.title}</A.ListThTitleClick>
                                     <A.ListTh>{el.writer}</A.ListTh>
                                     <A.ListTh>{getDate(el.createdAt)}</A.ListTh>
                                 </A.ListTr>
                             ))}
-                        </tbody>
-                    </table>
                 </A.TableBox>
 
                 <A.CreateButton onClick={props.onClickNewBoards}>

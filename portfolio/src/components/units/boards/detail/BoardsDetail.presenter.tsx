@@ -1,8 +1,9 @@
 import {MainBox, FlexBox2} from '../write/BoardWrite.styles';
 import * as A from './BoardsDetail.styles';
 import { getDate } from '../../../commons/libraries/utils'
+import { IBoardDetailUIProps } from './BoardsDetail.types';
 
-export default function BoardDetailUI(props) {
+export default function BoardDetailUI(props:IBoardDetailUIProps) {
 
     return (
         <A.Wrap>

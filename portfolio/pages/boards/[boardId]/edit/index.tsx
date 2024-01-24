@@ -30,8 +30,8 @@ export default function boardsEditPage() {
 
     return (
         <BoardWrite 
-        isEdit={true}
         data={data}
+        isEdit={true}
         />
     )
 }

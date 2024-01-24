@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ISubmitButtonProps } from "./BoardWrite.types";
 
 export const MainBox = styled.div`
     box-sizing: border-box;
@@ -88,7 +89,7 @@ export const Label = styled.label`
 export const SendBtn = styled.button`
     width: 178px;
     height: 52px;
-    background-color: ${(props) => props.isActive ? "yellow" : "none"};
+    background-color: ${(props: ISubmitButtonProps) => props.isActive ? "yellow" : "none"};
     text-align: center;
     line-height: 52px;
     font-size: 16px;

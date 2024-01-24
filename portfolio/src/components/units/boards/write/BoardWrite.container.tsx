@@ -1,11 +1,14 @@
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { useMutation } from "@apollo/client"
 import { useRouter } from 'next/router';
 import  BoardWriteUI from './BoardWrite.presenter'
 
 import {CREATE_BOARD, UPDATE_BOARD } from './BoardsWrite.queries'
 
-export default function BoardWrite(props) {
+import { IBoardWriteProps } from "./BoardWrite.types";
+import { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs, IUpdateBoardInput } from "../../../../commons/types/generated/types";
+
+export default function BoardWrite(props:IBoardWriteProps) {
 
     const router = useRouter()
 
@@ -19,25 +22,25 @@ export default function BoardWrite(props) {
     const [titleError, setTitleError] = useState("");
     const [contentsError, setContentsError] = useState("");
 
-    const [createBoard] = useMutation(CREATE_BOARD)
-    const [updateBoard] = useMutation(UPDATE_BOARD)
+    const [createBoard] = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(CREATE_BOARD)
+    const [updateBoard] = useMutation<Pick<IMutation,"updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD)
 
     const [isActive, setIsActive] = useState(false)
 
 
-    function writerValue(event) {
+    function writerValue(event: ChangeEvent<HTMLInputElement>) {
         setWriter(event.target.value)
         if (event.target.value !== "") {
             setWriterError("")
         }
-        if( event.target.valuer && password && title && contents ) {
+        if( event.target.value && password && title && contents ) {
             setIsActive(true)
         } else {
             setIsActive(false)
         }
     }
 
-    function passwordValue(event) {
+    function passwordValue(event: ChangeEvent<HTMLInputElement>) {
         setPassword(event.target.value)
         if (event.target.value !== "") {
             setPasswordError("")
@@ -50,7 +53,7 @@ export default function BoardWrite(props) {
         }
     }
 
-    function titleValue(event) {
+    function titleValue(event: ChangeEvent<HTMLInputElement>) {
         setTitle(event.target.value)
         if (event.target.value !== "") {
             setTitleError("")
@@ -63,7 +66,7 @@ export default function BoardWrite(props) {
         }
     }
 
-    function contentsValue(event) {
+    function contentsValue(event: ChangeEvent<HTMLTextAreaElement>) {
         setContents(event.target.value)
         if (event.target.value !== "") {
             setContentsError("")
@@ -107,9 +110,9 @@ export default function BoardWrite(props) {
                     }
                     })
                     // console.log(result.data.createBoard._id)
-                    router.push(`/boards/${result.data.createBoard._id}`)
+                    router.push(`/boards/${result.data?.createBoard._id}`)
             } catch(error) {
-                alert(error.message)
+                if(error instanceof Error) alert(error.message)
             }
         }
     }
@@ -124,11 +127,16 @@ export default function BoardWrite(props) {
             alert("비밀번호를 입력해 주세요.")
             return;
         }
+
+        const myVariables: IUpdateBoardInput  = {}
+            if(title) myVariables.title = title
+            if(contents) myVariables.contents = contents
         
         try {
-            const myVariables = {}
-            if(title) {myVariables.title = title}
-            if(contents) {myVariables.contents = contents}
+            if(typeof router.query.boardId !== "string") {
+                alert("시스템에 문제가 있습니다.")
+                return;
+            }
             const result = await updateBoard( {
                 variables: {
                     boardId: router.query.boardId,
@@ -137,12 +145,13 @@ export default function BoardWrite(props) {
                 }
             })
     
-            router.push(`/boards/${result.data.updateBoard._id}`)
+            router.push(`/boards/${result.data?.updateBoard._id}`)
         } catch(error) {
-            alert(error.message)
+            if(error instanceof Error) alert(error.message)
+        }
         }
         
-    }
+    
 
     return (
         <BoardWriteUI 
