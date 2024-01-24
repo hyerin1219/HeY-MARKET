@@ -1,7 +1,7 @@
 import { useQuery, gql } from "@apollo/client";
 import { MainBox } from "../list/BoardsList.styles";
 import * as A from './BoardsComment.styles';
-import { getDate } from "../../../../components/commons/libraries/utils"
+import { getDate } from "../../../commons/libraries/utils"
 import { useRouter } from "next/router";
 
 const FETCH_BOARD_COMMENTS = gql`

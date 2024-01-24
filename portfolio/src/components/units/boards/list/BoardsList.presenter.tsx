@@ -1,4 +1,4 @@
-import * as A from '../list/BoardsList.styles'
+import * as A from './BoardsList.styles'
 import { getDate } from '../../../commons/libraries/utils' 
 
 export default function BoardListUI(props) {
