@@ -1,6 +1,6 @@
 import BoardDetail from "../../../src/components/units/boards/detail/BoardsDetail.container"
-import BoardsComment from "../../../src/components/units/boards/comment/BoardsComment.container"
-import BoardsCommentWrite from "../../../src/components/units/boards/CommentWrite/CommentWrite.container"
+import BoardsCommentList from "../../../src/components/units/boardComment/list/BoardsComment.container"
+import BoardsCommentWrite from "../../../src/components/units/boardComment/write/CommentWrite.container"
 
 export default function  BoardDetailPage() {
 
@@ -8,7 +8,7 @@ export default function  BoardDetailPage() {
         <>
             <BoardDetail />
             <BoardsCommentWrite/>
-            <BoardsComment/>
+            <BoardsCommentList/>
         </>
     )
 }

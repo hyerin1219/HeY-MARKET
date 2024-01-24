@@ -1,7 +1,7 @@
 import BoardsCommentWriteUI from "./CommentWrite.presenter"
 import { CREATE_BOARD_COMMENT } from "./CommentWrite.queries" 
 import { useMutation, gql, useQuery} from "@apollo/client"
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { useRouter } from "next/router"
 
 
@@ -17,7 +17,7 @@ const FETCH_BOARD_COMMENTS = gql`
 `
 
 
-export default function BoardsCommentWrite(props) {
+export default function BoardsCommentWrite() {
 
     const [contents, setContent] = useState("")
     const [writer, setWriter] = useState("")
@@ -28,37 +28,46 @@ export default function BoardsCommentWrite(props) {
     const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT)
 
 
-    const onChangeContents = (event) => {
+    const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setContent(event.target.value)
     }
 
-    const onChangeWriter = (event) => {
+    const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
         setWriter(event.target.value)
     }
 
-    const onChangPassword = (event) => {
+    const onChangPassword = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value)
     }
 
     const onClickCommentSubmit = async () => {
 
-        const result = await createBoardComment( {
-            variables: {
-                boardId: router.query.boardId,
-                createBoardCommentInput: {
-                    contents,
-                    writer,
-                    password,
-                    rating: 0
-                }
-            },
-            refetchQueries: [
-                {
-                    query: FETCH_BOARD_COMMENTS,
-                    variables: {boardId: router.query.boardId}
-                }
-            ]
-        })
+        try{
+            if(typeof router.query.boardId !== "string") {
+                alert("시스템에 문제가 있습니다.")
+                return;
+            }
+    
+            await createBoardComment( {
+                variables: {
+                    boardId: router.query.boardId,
+                    createBoardCommentInput: {
+                        contents,
+                        writer,
+                        password,
+                        rating: 0
+                    }
+                },
+                refetchQueries: [
+                    {
+                        query: FETCH_BOARD_COMMENTS,
+                        variables: {boardId: router.query.boardId}
+                    }
+                ]
+            })
+        }   catch (error) {
+            if(error instanceof Error) alert(error.message);
+        }
         
     }
 
@@ -68,6 +77,7 @@ export default function BoardsCommentWrite(props) {
         onChangeWriter={onChangeWriter}
         onChangPassword={onChangPassword}
         onClickCommentSubmit={onClickCommentSubmit}
+        contents={contents}
         />
     )
 }

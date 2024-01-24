@@ -1,5 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
-import { MainBox } from "../list/BoardsList.styles";
+import { MainBox } from "../../boards/list/BoardsList.styles";
 import * as A from './BoardsComment.styles';
 import { getDate } from "../../../commons/libraries/utils"
 import { useRouter } from "next/router";

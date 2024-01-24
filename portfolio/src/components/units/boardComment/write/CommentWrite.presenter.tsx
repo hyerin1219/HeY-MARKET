@@ -1,7 +1,8 @@
-import { MainBox } from "../list/BoardsList.styles";
+import { MainBox } from "../../boards/list/BoardsList.styles";
 import * as A from './CommentWrite.styles';
+import { IBoardsCommentWriteUI } from "./CommentWrite.types";
 
-export default function BoardsCommentWriteUI(props) {
+export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUI) {
 
 
     return(
@@ -29,10 +30,10 @@ export default function BoardsCommentWriteUI(props) {
             </A.StarBox>
 
             <A.CommentInputBox>
-                <A.CommentInput  onChange={props.onChangeContents} placeholder='개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다.' maxlength="100"></A.CommentInput>
+                <A.CommentInput  onChange={props.onChangeContents} placeholder='개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다.' maxLength={100}></A.CommentInput>
             </A.CommentInputBox>
             <A.CommentUnderBox>
-                <A.CommentNumber>0</A.CommentNumber>
+                <A.CommentNumber>{props.contents.length}</A.CommentNumber>
                 <A.CommentNumber>/</A.CommentNumber>
                 <A.CommentNumber>100</A.CommentNumber>
                 <A.CommentSubmitButton onClick={props.onClickCommentSubmit}>등록하기</A.CommentSubmitButton>
