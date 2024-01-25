@@ -1,24 +1,17 @@
 import BoardsCommentUI from "./BoardsComment.presenter"
-import { gql, useQuery, useMutation} from "@apollo/client"
+import {  useQuery, useMutation} from "@apollo/client"
 import { useRouter } from "next/router"
-import { UPDATE_BOARD_COMMENT } from "./BoardsComment.queries"
-import { IQuery, IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types"
+import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from "./BoardsComment.queries"
+import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types"
+import { MouseEvent } from "react";
 
-const FETCH_BOARD_COMMENTS = gql`
-    query fetchBoardComments($page: Int, $boardId: ID!){
-        fetchBoardComments(page: $page, boardId: $boardId) {
-            _id
-            writer
-            contents
-            createdAt
-        }
-    }
-`
 
 export default function BoardsCommentList() {
 
     const router = useRouter()
-    const [fetchBoardComments] = useMutation(UPDATE_BOARD_COMMENT)
+    if(!router || typeof router.query.boardId !== "string") return <></>
+
+    const [deleteBoardComment] = useMutation<Pick<IMutation, "deleteBoardComment">, IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT)
 
     const {data} = useQuery<Pick<IQuery, "fetchBoardComments">,IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
         variables: {
@@ -26,8 +19,35 @@ export default function BoardsCommentList() {
         }
     })
 
+    const onClickDelete = async (event: MouseEvent<HTMLImageElement>) => {
+        const password = prompt("비밀번호를 입력하세요.")
+        try {
+            if(!(event.target instanceof HTMLImageElement)) {
+            alert("시스템에 문제가 있습니다.")
+            return;
+            }
+    
+            await deleteBoardComment({
+            variables: {
+                password,
+                boardCommentId: event.target.id,
+            },
+            refetchQueries: [
+                {
+                query: FETCH_BOARD_COMMENTS,
+                variables: { boardId: router.query.boardId },
+                },
+            ],
+            });
+        } catch (error) {
+            if(error instanceof Error) alert(error.message)
+        }
+        };
+
     return (
         <BoardsCommentUI
+        data={data}
+        onClickDelete={onClickDelete}
         />
     )
 }

@@ -1,20 +1,10 @@
 import BoardsCommentWriteUI from "./CommentWrite.presenter"
 import { CREATE_BOARD_COMMENT } from "./CommentWrite.queries" 
-import { useMutation, gql, useQuery} from "@apollo/client"
+import { useMutation} from "@apollo/client"
 import { ChangeEvent, useState } from "react"
 import { useRouter } from "next/router"
-
-
-const FETCH_BOARD_COMMENTS = gql`
-    query fetchBoardComments($page: Int, $boardId: ID!){
-        fetchBoardComments(page: $page, boardId:$boardId) {
-            _id
-            writer
-            contents
-            createdAt
-        }
-    }
-`
+import { IMutation, IMutationCreateBoardCommentArgs } from "../../../../commons/types/generated/types"
+import { FETCH_BOARD_COMMENTS } from "../list/BoardsComment.queries";
 
 
 export default function BoardsCommentWrite() {
@@ -24,8 +14,7 @@ export default function BoardsCommentWrite() {
     const [password, setPassword] = useState("")
 
     const router = useRouter()
-    const {data} = useQuery(FETCH_BOARD_COMMENTS)
-    const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT)
+    const [createBoardComment] = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT)
 
 
     const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
