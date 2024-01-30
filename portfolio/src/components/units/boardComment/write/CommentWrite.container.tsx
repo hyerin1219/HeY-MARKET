@@ -7,11 +7,13 @@ import { IMutation, IMutationCreateBoardCommentArgs } from "../../../../commons/
 import { FETCH_BOARD_COMMENTS } from "../list/BoardsComment.queries";
 
 
+
 export default function BoardsCommentWrite() {
 
     const [contents, setContent] = useState("")
     const [writer, setWriter] = useState("")
     const [password, setPassword] = useState("")
+    
 
     const router = useRouter()
     const [createBoardComment] = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT)
@@ -29,6 +31,8 @@ export default function BoardsCommentWrite() {
         setPassword(event.target.value)
     }
 
+
+
     const onClickCommentSubmit = async () => {
 
         try{
@@ -44,7 +48,7 @@ export default function BoardsCommentWrite() {
                         contents,
                         writer,
                         password,
-                        rating: 0
+                        rating
                     }
                 },
                 refetchQueries: [
