@@ -66,7 +66,7 @@ export default function BoardWrite(props:IBoardWriteProps) {
         }
     }
 
-    function contentsValue(event: ChangeEvent<HTMLTextAreaElement>) {
+    function contentsValue(event: ChangeEvent<HTMLTextAreaElement>): void {
         setContents(event.target.value)
         if (event.target.value !== "") {
             setContentsError("")
@@ -79,7 +79,7 @@ export default function BoardWrite(props:IBoardWriteProps) {
         }
     }
     
-    const onClickSubmit = async () => {
+    const onClickSubmit = async (): Promise<void> => {
         if (!writer) {
             setWriterError("작성자를 입력해주세요.")
         }
@@ -110,7 +110,7 @@ export default function BoardWrite(props:IBoardWriteProps) {
                     }
                     })
                     // console.log(result.data.createBoard._id)
-                    router.push(`/boards/${result.data?.createBoard._id}`)
+                    void router.push(`/boards/${result.data?.createBoard._id}`)
             } catch(error) {
                 if(error instanceof Error) alert(error.message)
             }
@@ -145,7 +145,7 @@ export default function BoardWrite(props:IBoardWriteProps) {
                 }
             })
     
-            router.push(`/boards/${result.data?.updateBoard._id}`)
+            void router.push(`/boards/${result.data?.updateBoard._id}`)
         } catch(error) {
             if(error instanceof Error) alert(error.message)
         }
