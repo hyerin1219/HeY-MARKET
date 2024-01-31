@@ -1,8 +1,8 @@
 import { MainBox } from "../../boards/list/BoardsList.styles";
 import * as A from './BoardsComment.styles';
 import { getDate } from "../../../commons/libraries/utils"
-import { IBoardCommentUIProps } from "./BoardsComment.types";
-
+import type { IBoardCommentUIProps } from "./BoardsComment.types";
+import { Rate } from 'antd';
 
 
 export default function BoardsCommentUI(props:IBoardCommentUIProps):JSX.Element {
@@ -19,7 +19,7 @@ export default function BoardsCommentUI(props:IBoardCommentUIProps):JSX.Element 
                                     <A.StarBox>
                                         <A.CommentProfileName>{el.writer}</A.CommentProfileName>
                                         <A.StarBox>
-                                            {el.rating}
+                                            <Rate disabled={true} onChange={props.onChangeStar} value={props.value} />    
                                         </A.StarBox> 
                                     </A.StarBox>   
                                     <A.CommentContents >{el.contents}</A.CommentContents>

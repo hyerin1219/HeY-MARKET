@@ -56,7 +56,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
 
                 <InputWrap2>
                     <InputTit>유튜브</InputTit>
-                    <InputBox placeholder='링크를 복사해주세요.'></InputBox>
+                    <InputBox placeholder='링크를 복사해주세요.' onChange={props.youtubeValue}></InputBox>
                 </InputWrap2>
 
                 <InputWrap2>

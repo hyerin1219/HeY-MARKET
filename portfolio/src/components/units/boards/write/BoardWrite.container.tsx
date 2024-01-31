@@ -1,14 +1,15 @@
-import { ChangeEvent, useState } from "react"
+import { useState } from "react"
+import type {ChangeEvent} from "react"
 import { useMutation } from "@apollo/client"
 import { useRouter } from 'next/router';
 import  BoardWriteUI from './BoardWrite.presenter'
 
 import {CREATE_BOARD, UPDATE_BOARD } from './BoardsWrite.queries'
 
-import { IBoardWriteProps } from "./BoardWrite.types";
-import { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs, IUpdateBoardInput } from "../../../../commons/types/generated/types";
+import type { IBoardWriteProps } from "./BoardWrite.types";
+import type { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs, IUpdateBoardInput } from "../../../../commons/types/generated/types";
 
-export default function BoardWrite(props:IBoardWriteProps) {
+export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
 
     const router = useRouter()
 
@@ -22,10 +23,15 @@ export default function BoardWrite(props:IBoardWriteProps) {
     const [titleError, setTitleError] = useState("");
     const [contentsError, setContentsError] = useState("");
 
+
     const [createBoard] = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(CREATE_BOARD)
     const [updateBoard] = useMutation<Pick<IMutation,"updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD)
 
     const [isActive, setIsActive] = useState(false)
+
+    function youtubeValue(event: ChangeEvent<HTMLInputElement>): void {
+        setYoutube(event.target.value)
+    }
 
 
     function writerValue(event: ChangeEvent<HTMLInputElement>) {
@@ -168,6 +174,7 @@ export default function BoardWrite(props:IBoardWriteProps) {
         isActive={isActive}
         isEdit={props.isEdit}
         data={props.data}
+        youtubeValue={youtubeValue}
         />
 
     )

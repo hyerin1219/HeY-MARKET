@@ -1,8 +1,8 @@
 import { MainBox } from "../../boards/list/BoardsList.styles";
 import * as A from './CommentWrite.styles';
-import { IBoardsCommentWriteUI } from "./CommentWrite.types";
+import type { IBoardsCommentWriteUI } from "./CommentWrite.types";
 import React, { useState } from 'react';
-import {  Rate } from 'antd';
+import { Rate } from 'antd';
 
 export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUI):JSX.Element {
 

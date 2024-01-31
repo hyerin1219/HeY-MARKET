@@ -6,7 +6,7 @@ import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCom
 import { MouseEvent } from "react";
 
 
-export default function BoardsCommentList() {
+export default function BoardsCommentList():JSX.Element {
 
     const router = useRouter()
     if(!router || typeof router.query.boardId !== "string") return <></>
