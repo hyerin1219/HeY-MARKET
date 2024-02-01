@@ -1,9 +1,10 @@
 import {MainBox, FlexBox2} from '../write/BoardWrite.styles';
 import * as A from './BoardsDetail.styles';
 import { getDate } from '../../../commons/libraries/utils'
-import { IBoardDetailUIProps } from './BoardsDetail.types';
+import type { IBoardDetailUIProps } from './BoardsDetail.types';
 
-export default function BoardDetailUI(props:IBoardDetailUIProps) {
+
+export default function BoardDetailUI(props:IBoardDetailUIProps):JSX.Element {
 
     return (
         <A.Wrap>
@@ -26,7 +27,9 @@ export default function BoardDetailUI(props:IBoardDetailUIProps) {
 
                 <A.BoardTitle >{props.data?.fetchBoard?.title}</A.BoardTitle>
                 <A.BoardContent >{props.data?.fetchBoard?.contents}</A.BoardContent>
-
+                <A.YoutubeBox 
+                    url={props.data?.fetchBoard?.youtubeUrl}
+                />
                 
                 <A.LikeWrap>
                     <A.LikeBox>

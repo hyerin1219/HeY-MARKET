@@ -2,8 +2,8 @@ import BoardsCommentUI from "./BoardsComment.presenter"
 import {  useQuery, useMutation} from "@apollo/client"
 import { useRouter } from "next/router"
 import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from "./BoardsComment.queries"
-import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types"
-import { MouseEvent } from "react";
+import type { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types"
+import type { MouseEvent } from "react";
 
 
 export default function BoardsCommentList():JSX.Element {
@@ -19,7 +19,7 @@ export default function BoardsCommentList():JSX.Element {
         }
     })
 
-    const onClickDelete = async (event: MouseEvent<HTMLImageElement>) => {
+    const onClickDelete = async (event: MouseEvent<HTMLImageElement>): Promise<void> => {
         const password = prompt("비밀번호를 입력하세요.")
         try {
             if(!(event.target instanceof HTMLImageElement)) {

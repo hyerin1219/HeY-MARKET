@@ -10,12 +10,13 @@ const FETCH_BOARD = gql`
             title
             contents
             createdAt
+            youtubeUrl
         }
     }
 `
 
 
-export default function boardsEditPage() {
+export default function boardsEditPage():JSX.Element {
 
     const router = useRouter()
 

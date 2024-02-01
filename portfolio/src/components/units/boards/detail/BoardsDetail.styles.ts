@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import ReactPlayer from "react-player";
 
 export const Wrap = styled.div`
     width: 1200px;
@@ -115,4 +116,6 @@ export const ListButton2 = styled.button`
     background-color: #ffffff;
 `
 
-
+export const YoutubeBox = styled(ReactPlayer)`
+    margin: 30px auto;
+`

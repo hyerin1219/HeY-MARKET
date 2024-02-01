@@ -20,7 +20,7 @@ export interface IBoardWriteUIProps {
     isActive: boolean
     isEdit: boolean
     data?: Pick<IQuery, "fetchBoard">
-    youtubeValue: () => void
+    youtubeUrlValue: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export interface ISubmitButtonProps {

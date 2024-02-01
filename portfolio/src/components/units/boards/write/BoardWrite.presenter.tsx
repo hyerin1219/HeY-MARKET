@@ -1,7 +1,7 @@
 import { MainBox, Title,  InputWrap,  InputWrap2,  InputBox,  TextareaBox, AdressBox, AdressBtn, InputTit, FlexBox, FlexBox2, ImgBox, Label, SendBtn, ErrorBox} from './BoardWrite.styles';
-import { IBoardWriteUIProps } from './BoardWrite.types';
+import type { IBoardWriteUIProps } from './BoardWrite.types';
 
-export default function BoardWriteUI(props:IBoardWriteUIProps) {
+export default function BoardWriteUI(props:IBoardWriteUIProps):JSX.Element {
 
 
     return (
@@ -56,7 +56,11 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
 
                 <InputWrap2>
                     <InputTit>유튜브</InputTit>
-                    <InputBox placeholder='링크를 복사해주세요.' onChange={props.youtubeValue}></InputBox>
+                    <InputBox 
+                    placeholder='링크를 복사해주세요.' 
+                    onChange={props.youtubeUrlValue} 
+                    defaultValue={props.data? props.data.fetchBoard.youtubeUrl : ""}
+                    />
                 </InputWrap2>
 
                 <InputWrap2>

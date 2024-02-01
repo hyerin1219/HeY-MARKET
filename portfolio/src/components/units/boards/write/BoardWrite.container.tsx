@@ -23,18 +23,19 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
     const [titleError, setTitleError] = useState("");
     const [contentsError, setContentsError] = useState("");
 
+    const [youtubeUrl, setYoutubeUrl] = useState("")
 
     const [createBoard] = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(CREATE_BOARD)
     const [updateBoard] = useMutation<Pick<IMutation,"updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD)
 
     const [isActive, setIsActive] = useState(false)
 
-    function youtubeValue(event: ChangeEvent<HTMLInputElement>): void {
-        setYoutube(event.target.value)
+    function youtubeUrlValue(event: ChangeEvent<HTMLInputElement>): void {
+        setYoutubeUrl(event.target.value)
     }
 
 
-    function writerValue(event: ChangeEvent<HTMLInputElement>) {
+    function writerValue(event: ChangeEvent<HTMLInputElement>): void {
         setWriter(event.target.value)
         if (event.target.value !== "") {
             setWriterError("")
@@ -46,7 +47,7 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         }
     }
 
-    function passwordValue(event: ChangeEvent<HTMLInputElement>) {
+    function passwordValue(event: ChangeEvent<HTMLInputElement>): void {
         setPassword(event.target.value)
         if (event.target.value !== "") {
             setPasswordError("")
@@ -59,7 +60,7 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         }
     }
 
-    function titleValue(event: ChangeEvent<HTMLInputElement>) {
+    function titleValue(event: ChangeEvent<HTMLInputElement>): void {
         setTitle(event.target.value)
         if (event.target.value !== "") {
             setTitleError("")
@@ -107,11 +108,12 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
             try {
                 const result = await createBoard({
                     variables: {
-                        createBoardInput: {
-                        writer,
-                        password,
-                        title,
-                        contents
+                            createBoardInput: {
+                            writer,
+                            password,
+                            title,
+                            contents,
+                            youtubeUrl
                         }
                     }
                     })
@@ -123,7 +125,7 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         }
     }
 
-    const onClickEdit = async () => {
+    const onClickEdit = async (): Promise<void> => {
 
         if(!title && !contents) {
             alert("수정한 내용이 없습니다.")
@@ -137,6 +139,7 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         const myVariables: IUpdateBoardInput  = {}
             if(title) myVariables.title = title
             if(contents) myVariables.contents = contents
+            if(youtubeUrl) myVariables.youtubeUrl = youtubeUrl
         
         try {
             if(typeof router.query.boardId !== "string") {
@@ -156,7 +159,6 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
             if(error instanceof Error) alert(error.message)
         }
         }
-        
     
 
     return (
@@ -174,7 +176,7 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         isActive={isActive}
         isEdit={props.isEdit}
         data={props.data}
-        youtubeValue={youtubeValue}
+        youtubeUrlValue={youtubeUrlValue}
         />
 
     )

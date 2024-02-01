@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { ISubmitButtonProps } from "./BoardWrite.types";
+import type { ISubmitButtonProps } from "./BoardWrite.types";
+
 
 export const MainBox = styled.div`
     box-sizing: border-box;
@@ -104,3 +105,5 @@ export const ErrorBox = styled.div`
     padding : 5px;
     margin: 5px 0;
 `
+
+

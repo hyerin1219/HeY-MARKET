@@ -30,7 +30,7 @@ export default function BoardsCommentWrite(): JSX.Element {
         setPassword(event.target.value)
     }
 
-    const onClickCommentSubmit = async () => {
+    const onClickCommentSubmit = async (): Promise<void> => {
 
         try{
             
