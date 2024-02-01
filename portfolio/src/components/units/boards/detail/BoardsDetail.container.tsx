@@ -2,10 +2,10 @@ import { useQuery, useMutation } from "@apollo/client"
 import { useRouter } from 'next/router';
 import {FETCH_BOARD, DELETE_BOARD} from './BoardsDetail.queries'
 import BoardDetailUI from "./BoardsDetail.presenter";
-import { IQuery, IQueryFetchBoardArgs } from "../../../../commons/types/generated/types";
-import { MouseEvent } from "react";
+import type { IQuery, IQueryFetchBoardArgs } from "../../../../commons/types/generated/types";
+import type { MouseEvent } from "react";
 
-export default function BoardDetail() {
+export default function BoardDetail():JSX.Element {
 
     const router = useRouter()
     if(!router || typeof router.query.boardId !== "string") return <></>

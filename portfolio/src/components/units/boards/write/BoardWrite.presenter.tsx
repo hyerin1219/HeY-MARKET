@@ -1,5 +1,7 @@
-import { MainBox, Title,  InputWrap,  InputWrap2,  InputBox,  TextareaBox, AdressBox, AdressBtn, InputTit, FlexBox, FlexBox2, ImgBox, Label, SendBtn, ErrorBox} from './BoardWrite.styles';
+
+import { MainBox, Title,  InputWrap,  InputWrap2,  InputBox,  TextareaBox, AdressBox, AdressBtn, InputTit, FlexBox, FlexBox2, ImgBox, Label, SendBtn, ErrorBox, AddressModal, AddressSearchInput} from './BoardWrite.styles';
 import type { IBoardWriteUIProps } from './BoardWrite.types';
+
 
 export default function BoardWriteUI(props:IBoardWriteUIProps):JSX.Element {
 
@@ -7,6 +9,11 @@ export default function BoardWriteUI(props:IBoardWriteUIProps):JSX.Element {
     return (
 
         <div>
+            {props.isOpen && (
+                <AddressModal visible={true}>
+                    <AddressSearchInput onComplete={props.onCompleteAddressSearch} />
+                </AddressModal>
+            )}
             <MainBox>
                 <Title>게시물 {props.isEdit ? "수정" : "등록"}</Title>
 
@@ -40,15 +47,30 @@ export default function BoardWriteUI(props:IBoardWriteUIProps):JSX.Element {
                     <TextareaBox  onChange={props.contentsValue} placeholder='내용을 작성해주세요.' defaultValue={props.data ? props.data.fetchBoard.contents : ""}></TextareaBox>
                     <ErrorBox>{props.contentsError}</ErrorBox>
                 </InputWrap2>
-
                 <InputTit>주소</InputTit>
+                
 
                 <FlexBox2>
-                    <AdressBox  placeholder="07250"></AdressBox>
-                    <AdressBtn>우편번호 검색</AdressBtn>
+                    <AdressBox  
+                    placeholder="07250"
+                    readOnly
+                    value={
+                        props.zipcode !== ""
+                        ? props.zipcode
+                        : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
+                    }
+                    ></AdressBox>
+                    <AdressBtn onClick={props.onClickAddressSearch}>우편번호 검색</AdressBtn>
                 </FlexBox2>
                 <InputWrap2>
-                    <InputBox ></InputBox>
+                    <InputBox 
+                        readOnly
+                        value={
+                            props.address !== ""
+                            ? props.address
+                            : props.data?.fetchBoard.boardAddress?.address ?? ""
+                        }
+                    ></InputBox>
                 </InputWrap2>
                 <InputWrap2>
                     <InputBox ></InputBox>

@@ -21,6 +21,12 @@ export interface IBoardWriteUIProps {
     isEdit: boolean
     data?: Pick<IQuery, "fetchBoard">
     youtubeUrlValue: (event: ChangeEvent<HTMLInputElement>) => void
+    onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+    onClickAddressSearch: () => void;
+    onCompleteAddressSearch: (data: any) => void;
+    isOpen: boolean;
+    zipcode: string;
+    address: string;
 }
 
 export interface ISubmitButtonProps {

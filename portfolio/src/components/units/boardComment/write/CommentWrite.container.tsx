@@ -14,9 +14,10 @@ export default function BoardsCommentWrite(): JSX.Element {
     const [writer, setWriter] = useState("")
     const [password, setPassword] = useState("")
 
+    const [star, setStar] = useState(0);
+
     const router = useRouter()
     const [createBoardComment] = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT)
-
 
     const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setContent(event.target.value)
@@ -46,7 +47,7 @@ export default function BoardsCommentWrite(): JSX.Element {
                         contents,
                         writer,
                         password,
-                        rating: 0 
+                        rating: star
                     }
                 },
                 refetchQueries: [
@@ -69,6 +70,7 @@ export default function BoardsCommentWrite(): JSX.Element {
         onChangPassword={onChangPassword}
         onClickCommentSubmit={onClickCommentSubmit}
         contents={contents}
+        setStar={setStar}
         />
     )
 }

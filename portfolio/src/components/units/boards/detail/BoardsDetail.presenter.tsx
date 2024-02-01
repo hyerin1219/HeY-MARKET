@@ -2,10 +2,10 @@ import {MainBox, FlexBox2} from '../write/BoardWrite.styles';
 import * as A from './BoardsDetail.styles';
 import { getDate } from '../../../commons/libraries/utils'
 import type { IBoardDetailUIProps } from './BoardsDetail.types';
-
+import { Tooltip } from 'antd';
 
 export default function BoardDetailUI(props:IBoardDetailUIProps):JSX.Element {
-
+    
     return (
         <A.Wrap>
             <MainBox>
@@ -19,7 +19,15 @@ export default function BoardDetailUI(props:IBoardDetailUIProps):JSX.Element {
                     </FlexBox2>
                     <FlexBox2>
                         <A.YellowImg src='/images/link.png'></A.YellowImg>
-                        <A.YellowImg  src='/images/location.png'></A.YellowImg>
+
+                        <Tooltip 
+                            placement='topRight'
+                            title={`${props.data?.fetchBoard.boardAddress?.address ?? ""} ${props.data?.fetchBoard.boardAddress?.addressDetail ?? ""}`}
+                            >
+                            
+                            <A.YellowImg  src='/images/location.png'></A.YellowImg>
+                        </Tooltip>
+                        
                     </FlexBox2>
                 </A.CenterBox>
 

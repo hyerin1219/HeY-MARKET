@@ -19,7 +19,7 @@ export default function BoardsCommentUI(props:IBoardCommentUIProps):JSX.Element 
                                     <A.StarBox>
                                         <A.CommentProfileName>{el.writer}</A.CommentProfileName>
                                         <A.StarBox>
-                                            <Rate disabled={true} onChange={props.onChangeStar} value={props.value} />    
+                                            <Rate disabled defaultValue={el.rating} />    
                                         </A.StarBox> 
                                     </A.StarBox>   
                                     <A.CommentContents >{el.contents}</A.CommentContents>

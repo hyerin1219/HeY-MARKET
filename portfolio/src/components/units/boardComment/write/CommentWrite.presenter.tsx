@@ -1,12 +1,12 @@
 import { MainBox } from "../../boards/list/BoardsList.styles";
 import * as A from './CommentWrite.styles';
 import type { IBoardsCommentWriteUI } from "./CommentWrite.types";
-import React, { useState } from 'react';
+import React from 'react';
 import { Rate } from 'antd';
 
 export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUI):JSX.Element {
 
-    const [value, setValue] = useState(0);
+    
 
     return(
 
@@ -23,7 +23,7 @@ export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUI):JSX.El
                 <A.WriterInput placeholder="작성자" onChange={props.onChangeWriter}></A.WriterInput>
                 <A.WriterInput placeholder="비밀번호" onChange={props.onChangPassword}></A.WriterInput>
                 <A.StarBox>
-                <Rate onChange={setValue} value={value} />
+                <Rate onChange={props.setStar}/>
                 </A.StarBox>
 
             </A.StarBox>

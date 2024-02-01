@@ -8,6 +8,8 @@ import {CREATE_BOARD, UPDATE_BOARD } from './BoardsWrite.queries'
 
 import type { IBoardWriteProps } from "./BoardWrite.types";
 import type { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs, IUpdateBoardInput } from "../../../../commons/types/generated/types";
+import type { Address } from "react-daum-postcode";
+
 
 export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
 
@@ -24,16 +26,34 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
     const [contentsError, setContentsError] = useState("");
 
     const [youtubeUrl, setYoutubeUrl] = useState("")
+    const [addressDetail, setAddressDetail] = useState("")
+    const [isOpen, setIsOpen] = useState(false)
+    const [zipcode, setZipcode] = useState("")
+    const [address, setAddress] = useState("");
 
     const [createBoard] = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(CREATE_BOARD)
     const [updateBoard] = useMutation<Pick<IMutation,"updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD)
 
     const [isActive, setIsActive] = useState(false)
 
-    function youtubeUrlValue(event: ChangeEvent<HTMLInputElement>): void {
+    const youtubeUrlValue = (event: ChangeEvent<HTMLInputElement>): void => {
         setYoutubeUrl(event.target.value)
     }
 
+    const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>): void => {
+        setAddressDetail(event.target.value)
+    }
+
+    const onClickAddressSearch = (): void => {
+        setIsOpen((prev) => !prev)
+    }
+
+
+    const onCompleteAddressSearch = (data: Address): void => {
+        setAddress(data.address)
+        setZipcode(data.zonecode)
+        setIsOpen((prev) => !prev)
+    }
 
     function writerValue(event: ChangeEvent<HTMLInputElement>): void {
         setWriter(event.target.value)
@@ -113,7 +133,12 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
                             password,
                             title,
                             contents,
-                            youtubeUrl
+                            youtubeUrl,
+                            boardAddress: {
+                                zipcode,
+                                address,
+                                addressDetail
+                            }
                         }
                     }
                     })
@@ -123,6 +148,7 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
                 if(error instanceof Error) alert(error.message)
             }
         }
+        
     }
 
     const onClickEdit = async (): Promise<void> => {
@@ -159,7 +185,7 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
             if(error instanceof Error) alert(error.message)
         }
         }
-    
+        
 
     return (
         <BoardWriteUI 
@@ -177,6 +203,12 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         isEdit={props.isEdit}
         data={props.data}
         youtubeUrlValue={youtubeUrlValue}
+        onChangeAddressDetail={onChangeAddressDetail}
+        onClickAddressSearch={onClickAddressSearch}
+        onCompleteAddressSearch={onCompleteAddressSearch}
+        zipcode={zipcode}
+        address={address}
+        isOpen={isOpen}
         />
 
     )
