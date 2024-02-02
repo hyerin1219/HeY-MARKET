@@ -19,15 +19,15 @@ export default function BoardsCommentWrite(): JSX.Element {
     const router = useRouter()
     const [createBoardComment] = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT)
 
-    const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>): void => {
         setContent(event.target.value)
     }
 
-    const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
         setWriter(event.target.value)
     }
 
-    const onChangPassword = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChangPassword = (event: ChangeEvent<HTMLInputElement>): void => {
         setPassword(event.target.value)
     }
 

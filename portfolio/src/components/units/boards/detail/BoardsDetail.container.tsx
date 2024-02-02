@@ -18,21 +18,21 @@ export default function BoardDetail():JSX.Element {
 
     const [deleteBoard] = useMutation(DELETE_BOARD)
 
-    const onClickDeleteBoard = (event: MouseEvent<HTMLButtonElement>) => {
+    const onClickDeleteBoard = (event: MouseEvent<HTMLButtonElement>): void => {
         if(event.target instanceof HTMLButtonElement)
         deleteBoard({
             variables: {boardId: event.target.id}
         })
-        router.push(`/boards/`)
+         void router.push(`/boards/`)
     }
 
-    const onClickList = () => {
-        router.push(`/boards/`)
+    const onClickList = ():void => {
+         void router.push(`/boards/`)
     }
     
 
-    const onClickEditBoard = () => {
-        router.push(`/boards/${router.query.boardId}/edit`)
+    const onClickEditBoard = ():void => {
+         void router.push(`/boards/${router.query.boardId}/edit`)
     }
     
 

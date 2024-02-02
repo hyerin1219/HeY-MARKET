@@ -1,6 +1,6 @@
 import  BoardWrite from '../../../src/components/units/boards/write/BoardWrite.container'
 
-export default function boardsNewPage() {
+export default function boardsNewPage():JSX.Element {
 
     return (
         <BoardWrite 
