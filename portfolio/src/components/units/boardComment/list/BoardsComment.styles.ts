@@ -50,3 +50,12 @@ export const CommentImg = styled.img`
 export const StarBox = styled.div`
     display: flex;
 `
+
+export const ModalInput = styled.input`
+    width: 95%;
+    border-radius: 20px;
+    border: 2px solid #000;
+    padding: 0 10px;
+    margin: 20px 0;
+    font-size: 20px;
+`

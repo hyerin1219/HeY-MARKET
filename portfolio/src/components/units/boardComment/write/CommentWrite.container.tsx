@@ -60,7 +60,11 @@ export default function BoardsCommentWrite(): JSX.Element {
         }   catch (error) {
             if(error instanceof Error) alert(error.message);
         }
-        
+
+        setContent("")
+        setWriter("")
+        setPassword("")
+        setStar(0)
     }
 
     return(
@@ -71,6 +75,9 @@ export default function BoardsCommentWrite(): JSX.Element {
         onClickCommentSubmit={onClickCommentSubmit}
         contents={contents}
         setStar={setStar}
+        writer={writer}
+        password={password}
+        star={star}
         />
     )
 }

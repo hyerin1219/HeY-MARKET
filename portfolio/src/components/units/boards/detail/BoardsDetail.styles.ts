@@ -103,6 +103,10 @@ export const ListButton = styled.button`
     font-size: 16px;
     cursor:pointer;
     background-color: #ffffff;
+    :hover {
+        background-color: yellow;
+        border-color: yellow;
+    }
 `
 
 export const ListButton2 = styled.button`
@@ -114,6 +118,10 @@ export const ListButton2 = styled.button`
     font-size: 16px;
     cursor:pointer;
     background-color: #ffffff;
+    :hover {
+        background-color: yellow;
+        border-color: yellow;
+    }
 `
 
 export const YoutubeBox = styled(ReactPlayer)`

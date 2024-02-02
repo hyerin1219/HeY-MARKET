@@ -20,16 +20,16 @@ export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUI):JSX.El
             </A.CommentTitleBox>
 
             <A.StarBox>
-                <A.WriterInput placeholder="작성자" onChange={props.onChangeWriter}></A.WriterInput>
-                <A.WriterInput placeholder="비밀번호" onChange={props.onChangPassword}></A.WriterInput>
+                <A.WriterInput placeholder="작성자" onChange={props.onChangeWriter} value={props.writer}></A.WriterInput>
+                <A.WriterInput placeholder="비밀번호" onChange={props.onChangPassword} value={props.password}></A.WriterInput>
                 <A.StarBox>
-                <Rate onChange={props.setStar}/>
+                <Rate onChange={props.setStar} value={props.star}/>
                 </A.StarBox>
 
             </A.StarBox>
 
             <A.CommentInputBox>
-                <A.CommentInput  onChange={props.onChangeContents} placeholder='개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다.' maxLength={100}></A.CommentInput>
+                <A.CommentInput  onChange={props.onChangeContents} placeholder='개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다.' maxLength={100} value={props.contents}></A.CommentInput>
             </A.CommentInputBox>
             <A.CommentUnderBox>
                 <A.CommentNumber>{props.contents.length}</A.CommentNumber>

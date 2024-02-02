@@ -153,19 +153,25 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
 
     const onClickEdit = async (): Promise<void> => {
 
-        if(!title && !contents) {
+        if(title === "" && contents  === "" && youtubeUrl  === "" && address  === "" && addressDetail  === "" && zipcode  === "") {
             alert("수정한 내용이 없습니다.")
             return;
         }
-        if(!password) {
+        if(password  === "") {
             alert("비밀번호를 입력해 주세요.")
             return;
         }
 
         const myVariables: IUpdateBoardInput  = {}
-            if(title) myVariables.title = title
-            if(contents) myVariables.contents = contents
-            if(youtubeUrl) myVariables.youtubeUrl = youtubeUrl
+            if(title  === "") myVariables.title = title
+            if(contents  === "") myVariables.contents = contents
+            if(youtubeUrl  === "") myVariables.youtubeUrl = youtubeUrl
+            if(address  === "" && addressDetail  === "" && zipcode  === ""){
+                myVariables.boardAddress = {}
+                if(zipcode  === "") myVariables.boardAddress.zipcode = zipcode
+                if(address  === "") myVariables.boardAddress.zipcode = address
+                if(addressDetail === "") myVariables.boardAddress.zipcode = addressDetail
+            }
         
         try {
             if(typeof router.query.boardId !== "string") {

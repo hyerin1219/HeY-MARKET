@@ -6,5 +6,8 @@ export interface IBoardsCommentWriteUI {
     onChangPassword: (event: ChangeEvent<HTMLInputElement>) => void
     onClickCommentSubmit: () => void
     contents: string
+    writer: string
+    password: string
+    star: number
     setStar: Dispatch<SetStateAction<number>>
 }
