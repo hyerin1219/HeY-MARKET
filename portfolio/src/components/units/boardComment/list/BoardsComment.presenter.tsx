@@ -1,6 +1,6 @@
 import { MainBox } from "../../boards/list/BoardsList.styles";
 import * as A from './BoardsComment.styles';
-import { getDate } from "../../../commons/libraries/utils"
+import { getDate } from "../../../../commons/libraries/utils"
 import type { IBoardCommentUIProps } from "./BoardsComment.types";
 import { Rate, Modal } from 'antd';
 

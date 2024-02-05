@@ -1,5 +1,5 @@
 import * as A from './BoardsList.styles'
-import { getDate } from '../../../commons/libraries/utils' 
+import { getDate } from '../../../../commons/libraries/utils' 
 import { IBoardListUIProps } from './BoardsList.types'
 
 export default function BoardListUI(props:IBoardListUIProps) {

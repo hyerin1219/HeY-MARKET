@@ -9,12 +9,12 @@ import type { MouseEvent, ChangeEvent} from "react";
 
 export default function BoardsCommentList():JSX.Element {
 
+    const router = useRouter()
+    if(typeof router.query.boardId !== "string") return <></>
+
     const [isOpenModal , setIsOpenModal] = useState(false)
     const [boardCommentId, setBoardCommentId] = useState("");
     const [ password, setPassword] = useState("")
-
-    const router = useRouter()
-    if(typeof router.query.boardId !== "string") return <></>
 
     const [deleteBoardComment] = useMutation<Pick<IMutation, "deleteBoardComment">, IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT)
 

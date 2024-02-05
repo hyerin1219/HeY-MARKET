@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const MainBox = styled.div`
     width: 1200px;
+    margin: 50px auto;
 `
 
 export const TableBox = styled.div`

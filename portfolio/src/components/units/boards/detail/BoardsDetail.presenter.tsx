@@ -1,6 +1,6 @@
 import {MainBox, FlexBox2} from '../write/BoardWrite.styles';
 import * as A from './BoardsDetail.styles';
-import { getDate } from '../../../commons/libraries/utils'
+import { getDate } from '../../../../commons/libraries/utils'
 import type { IBoardDetailUIProps } from './BoardsDetail.types';
 import { Tooltip } from 'antd';
 
