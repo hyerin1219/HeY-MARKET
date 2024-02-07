@@ -1,6 +1,7 @@
 import * as A from './BoardsList.styles'
 import { getDate } from '../../../../commons/libraries/utils' 
 import type { IBoardListUIProps } from './BoardsList.types'
+import PaginationPage from "../../../commons/pagination/Pagination.container"
 
 export default function BoardListUI(props:IBoardListUIProps):JSX.Element {
 
@@ -24,6 +25,8 @@ export default function BoardListUI(props:IBoardListUIProps):JSX.Element {
                                 </A.ListTr>
                             ))}
                 </A.TableBox>
+                
+                <PaginationPage refetch={props.refetch} count={props.count} />
 
                 <A.CreateButton onClick={props.onClickNewBoards}>
                     <A.ButtonImg src='/images/pencil.png'></A.ButtonImg>

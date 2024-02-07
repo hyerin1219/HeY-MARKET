@@ -4,7 +4,7 @@ import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardsList.queries"
 import { useRouter } from "next/router"
 import type { IQuery, IQueryFetchBoardsArgs, IQueryFetchBoardsCountArgs } from "../../../../commons/types/generated/types"
 import type { MouseEvent } from "react"
-import PaginationPage from "../../pagination"
+
 
 export default function BoardList(): JSX.Element {
 
@@ -22,18 +22,14 @@ export default function BoardList(): JSX.Element {
         void router.push(`/boards/new`)
     }
 
-    const lastPage =  PageCountData != null ? Math.ceil(PageCountData?.fetchBoardsCount / 10) : 1
-
     return (
         <>
             <BoardListUI 
             data={data}
             onClickNewBoards={onClickNewBoards}
             onClickDetail={onClickDetail}
-            />
-            <PaginationPage
-                refetch={refetch}
-                lastPage={lastPage}
+            refetch={refetch}
+            count={PageCountData?.fetchBoardsCount}
             />
         </>
     )
