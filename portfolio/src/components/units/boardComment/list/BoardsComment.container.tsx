@@ -16,16 +16,22 @@ export default function BoardsCommentList():JSX.Element {
     const [boardCommentId, setBoardCommentId] = useState("");
     const [ password, setPassword] = useState("")
 
+    const [isEdit, setIsEdit] = useState(false)
+
     const [deleteBoardComment] = useMutation<Pick<IMutation, "deleteBoardComment">, IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT)
 
-    const {data} = useQuery<Pick<IQuery, "fetchBoardComments">,IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
-        variables: {
+    const {data, fetchMore} = useQuery<Pick<IQuery, "fetchBoardComments">,IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
+        variables: { 
             boardId: router.query.boardId
         }
     })
 
+    const onClickEdit = ():void => {
+        setIsEdit(true)
+        console.log(isEdit)
+    }
+
     const onClickDelete = async (event: MouseEvent<HTMLModElement>): Promise<void> => {
-        // const password = prompt("비밀번호를 입력하세요.")
         try {
             await deleteBoardComment({
             variables: {
@@ -45,14 +51,35 @@ export default function BoardsCommentList():JSX.Element {
         }
         };
 
-        const onClickOpenDeleteModal = (event: MouseEvent<HTMLImageElement>): void => {
-            setBoardCommentId(event.currentTarget.id)
-            setIsOpenModal(true);
-        }
+    const onClickOpenDeleteModal = (event: MouseEvent<HTMLImageElement>): void => {
+        setBoardCommentId(event.currentTarget.id)
+        setIsOpenModal(true);
+    }
 
-        const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>): void => {
-            setPassword(event.target.value)
-        }
+    const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>): void => {
+        setPassword(event.target.value)
+    }
+
+    const onCommentLoad = ():void => {
+
+        if (data === undefined) return
+
+        void fetchMore({
+            variables: { page: Math.ceil(data?.fetchBoardComments.length / 10 ?? 10) + 1 },
+            updateQuery: (prev, {fetchMoreResult}) => { 
+                if (fetchMoreResult.fetchBoardComments === undefined) {
+                    return {
+                        fetchBoardComments: [...prev.fetchBoardComments]
+                    }
+                }
+                return{
+                    fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments]
+                }
+            }
+        })
+
+        
+    }
 
     return (
         <BoardsCommentUI
@@ -61,6 +88,8 @@ export default function BoardsCommentList():JSX.Element {
         onClickOpenDeleteModal={onClickOpenDeleteModal}
         onChangeDeletePassword={onChangeDeletePassword}
         isOpenModal={isOpenModal}
+        onCommentLoad={onCommentLoad}
+        onClickEdit={onClickEdit}
         />
     )
 }

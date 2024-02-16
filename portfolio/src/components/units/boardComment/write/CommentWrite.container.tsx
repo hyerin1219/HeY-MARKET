@@ -1,7 +1,6 @@
-import BoardsCommentWriteUI from "./CommentWrite.presenter"
+import BoardsCommentWriteUI from "./CommentWrite.pressenter"
 import { CREATE_BOARD_COMMENT } from "./CommentWrite.queries" 
 import { useMutation} from "@apollo/client"
-import type { ChangeEvent } from "react"
 import { useState } from "react"
 import { useRouter } from "next/router"
 import type { IMutation, IMutationCreateBoardCommentArgs } from "../../../../commons/types/generated/types"
@@ -10,25 +9,22 @@ import { FETCH_BOARD_COMMENTS } from "../list/BoardsComment.queries";
 
 export default function BoardsCommentWrite(): JSX.Element {
 
-    const [contents, setContent] = useState("")
-    const [writer, setWriter] = useState("")
-    const [password, setPassword] = useState("")
+    const [inputs, setInputs] = useState({
+        writer: "",
+        password: "",
+        contents: ""
+    })
 
     const [star, setStar] = useState(0);
 
     const router = useRouter()
     const [createBoardComment] = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT)
 
-    const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>): void => {
-        setContent(event.target.value)
-    }
-
-    const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
-        setWriter(event.target.value)
-    }
-
-    const onChangPassword = (event: ChangeEvent<HTMLInputElement>): void => {
-        setPassword(event.target.value)
+    const onChangeInputs = (event:any):void => {
+        setInputs((prev) => ({
+            ...prev,
+            [event.target.id]: event.target.value
+        }))
     }
 
     const onClickCommentSubmit = async (): Promise<void> => {
@@ -44,9 +40,7 @@ export default function BoardsCommentWrite(): JSX.Element {
                 variables: {
                     boardId: router.query.boardId,
                     createBoardCommentInput: {
-                        contents,
-                        writer,
-                        password,
+                        ...inputs,
                         rating: star
                     }
                 },
@@ -61,23 +55,16 @@ export default function BoardsCommentWrite(): JSX.Element {
             if(error instanceof Error) alert(error.message);
         }
 
-        setContent("")
-        setWriter("")
-        setPassword("")
         setStar(0)
     }
 
     return(
         <BoardsCommentWriteUI
-        onChangeContents={onChangeContents}
-        onChangeWriter={onChangeWriter}
-        onChangPassword={onChangPassword}
         onClickCommentSubmit={onClickCommentSubmit}
-        contents={contents}
         setStar={setStar}
-        writer={writer}
-        password={password}
         star={star}
+        onChangeInputs={onChangeInputs}
+        inputs={inputs}
         />
     )
 }

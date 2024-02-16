@@ -1,10 +1,10 @@
 import { MainBox } from "../../boards/list/BoardsList.styles";
 import * as A from './CommentWrite.styles';
-import type { IBoardsCommentWriteUI } from "./CommentWrite.types";
+import type { IBoardsCommentWriteUIProps } from "./CommentWrite.types";
 import React from 'react';
 import { Rate } from 'antd';
 
-export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUI):JSX.Element {
+export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUIProps):JSX.Element {
 
     
 
@@ -20,8 +20,8 @@ export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUI):JSX.El
             </A.CommentTitleBox>
 
             <A.StarBox>
-                <A.WriterInput placeholder="작성자" onChange={props.onChangeWriter} value={props.writer}></A.WriterInput>
-                <A.WriterInput placeholder="비밀번호" onChange={props.onChangPassword} value={props.password}></A.WriterInput>
+                <A.WriterInput placeholder="작성자" id="writer" onChange={props.onChangeInputs} value={props.inputs.writer}></A.WriterInput>
+                <A.WriterInput placeholder="비밀번호" id="password" onChange={props.onChangeInputs} value={props.inputs.password}></A.WriterInput>
                 <A.StarBox>
                 <Rate onChange={props.setStar} value={props.star}/>
                 </A.StarBox>
@@ -29,10 +29,10 @@ export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUI):JSX.El
             </A.StarBox>
 
             <A.CommentInputBox>
-                <A.CommentInput  onChange={props.onChangeContents} placeholder='개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다.' maxLength={100} value={props.contents}></A.CommentInput>
+                <A.CommentInput id="contents"  onChange={props.onChangeInputs} placeholder='개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다.' maxLength={100} value={props.inputs.contents}></A.CommentInput>
             </A.CommentInputBox>
             <A.CommentUnderBox>
-                <A.CommentNumber>{props.contents.length}</A.CommentNumber>
+                <A.CommentNumber>{props.inputs.contents.length}</A.CommentNumber>
                 <A.CommentNumber>/</A.CommentNumber>
                 <A.CommentNumber>100</A.CommentNumber>
                 <A.CommentSubmitButton onClick={props.onClickCommentSubmit}>등록하기</A.CommentSubmitButton>

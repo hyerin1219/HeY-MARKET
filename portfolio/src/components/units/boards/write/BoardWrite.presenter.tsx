@@ -38,13 +38,13 @@ export default function BoardWriteUI(props:IBoardWriteUIProps):JSX.Element {
 
                 <InputWrap2>
                     <InputTit>제목</InputTit>
-                    <InputBox  onChange={props.titleValue} placeholder='제목을 작성해주세요.' defaultValue={props.data ? props.data.fetchBoard.title : ""}></InputBox>
+                    <InputBox  onChange={props.titleValue} placeholder='제목을 작성해주세요.' defaultValue={props.data?.fetchBoard.title}></InputBox>
                     <ErrorBox>{props.titleError}</ErrorBox>
                 </InputWrap2>
 
                 <InputWrap2>
                     <InputTit>내용</InputTit>
-                    <TextareaBox  onChange={props.contentsValue} placeholder='내용을 작성해주세요.' defaultValue={props.data ? props.data.fetchBoard.contents : ""}></TextareaBox>
+                    <TextareaBox  onChange={props.contentsValue} placeholder='내용을 작성해주세요.' defaultValue={props.data?.fetchBoard.contents}></TextareaBox>
                     <ErrorBox>{props.contentsError}</ErrorBox>
                 </InputWrap2>
                 <InputTit>주소</InputTit>
@@ -81,7 +81,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps):JSX.Element {
                     <InputBox 
                     placeholder='링크를 복사해주세요.' 
                     onChange={props.youtubeUrlValue} 
-                    defaultValue={props.data? props.data.fetchBoard.youtubeUrl : ""}
+                    defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""}
                     />
                 </InputWrap2>
 

@@ -59,3 +59,8 @@ export const ModalInput = styled.input`
     margin: 20px 0;
     font-size: 20px;
 `
+
+export const ScrollBox = styled.div`
+    height: 1400px;
+    overflow: auto;
+`

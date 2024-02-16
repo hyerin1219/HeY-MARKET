@@ -65,7 +65,7 @@ export const CommentNumber = styled.span`
 export const CommentSubmitButton = styled.button`
     position: absolute;
     bottom: 0;
-    right: -4px;
+    right: 0px;
     width: 91px;
     height: 52px;
     background-color: #000;

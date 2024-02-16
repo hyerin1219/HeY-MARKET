@@ -163,10 +163,10 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         }
 
         const myVariables: IUpdateBoardInput  = {}
-            if(title  === "") myVariables.title = title
-            if(contents  === "") myVariables.contents = contents
-            if(youtubeUrl  === "") myVariables.youtubeUrl = youtubeUrl
-            if(address  === "" && addressDetail  === "" && zipcode  === ""){
+            if(title  !== "") myVariables.title = title
+            if(contents  !== "") myVariables.contents = contents
+            if(youtubeUrl  !== "") myVariables.youtubeUrl = youtubeUrl
+            if(address  !== "" && addressDetail  === "" && zipcode  === ""){
                 myVariables.boardAddress = {}
                 if(zipcode  === "") myVariables.boardAddress.zipcode = zipcode
                 if(address  === "") myVariables.boardAddress.zipcode = address

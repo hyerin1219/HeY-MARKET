@@ -1,13 +1,13 @@
-import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
-export interface IBoardsCommentWriteUI {
-    onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void
-    onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void
-    onChangPassword: (event: ChangeEvent<HTMLInputElement>) => void
+export interface IBoardsCommentWriteUIProps {
+    onChangeInputs: (event:any) => void
     onClickCommentSubmit: () => void
-    contents: string
-    writer: string
-    password: string
-    star: number
     setStar: Dispatch<SetStateAction<number>>
+    star: number
+    inputs: {
+        writer: string
+        password: string
+        contents: string
+    }
 }
