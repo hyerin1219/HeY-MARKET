@@ -7,12 +7,12 @@ import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from "./BoardsComment.quer
 import type { IMutation, IMutationDeleteBoardCommentArgs } from "../../../../commons/types/generated/types"
 import { useState  } from "react";
 import type { MouseEvent, ChangeEvent} from "react";
+import BoardsCommentWrite from '../write/CommentWrite.container';
+import type { BoardsCommentItemProps } from './BoardsComment.types';
 
-
-export default function BoardsCommentItem(props:any):JSX.Element {
+export default function BoardsCommentItem(props:BoardsCommentItemProps):JSX.Element {
 
     const router = useRouter()
-    if(typeof router.query.boardId !== "string") return <></>
 
     const [isOpenModal , setIsOpenModal] = useState(false)
     const [boardCommentId, setBoardCommentId] = useState("");
@@ -24,7 +24,6 @@ export default function BoardsCommentItem(props:any):JSX.Element {
 
     const onClickEdit = ():void => {
         setIsEdit(true)
-        console.log(isEdit)
     }
 
     const onClickDelete = async (event: MouseEvent<HTMLModElement>): Promise<void> => {
@@ -55,7 +54,7 @@ export default function BoardsCommentItem(props:any):JSX.Element {
     const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>): void => {
         setPassword(event.target.value)
     }
-
+    console.log(props.el)
 
     return(
         <>
@@ -66,25 +65,29 @@ export default function BoardsCommentItem(props:any):JSX.Element {
                 </Modal>
             )}
 
-            <A.CommentListBox key={props.el._id}>
-                <A.CommentProfileImg src="/images/profile.png" />
-                <div>                         
-                    <A.CommentProfileBox>
-                            <A.StarBox>
-                                <A.CommentProfileName>{props.el.writer}</A.CommentProfileName>
+            {!isEdit ? (
+                <A.CommentListBox key={props.el._id}>
+                    <A.CommentProfileImg src="/images/profile.png" />
+                    <div>                         
+                        <A.CommentProfileBox>
                                 <A.StarBox>
-                                    <Rate disabled value={props.el.rating} />    
-                                </A.StarBox> 
-                            </A.StarBox>   
-                            <A.CommentContents >{props.el.contents}</A.CommentContents>
-                        <A.CommentCreateDate>{getDate(props.el.createdAt)}</A.CommentCreateDate>
-                    </A.CommentProfileBox>
-                </div>
-                <A.StarBox>
-                    <A.CommentImg onClick={onClickEdit} src="/images/update.png"></A.CommentImg>
-                    <A.CommentImg id={props.el._id} onClick={onClickOpenDeleteModal} src="/images/clear.png"></A.CommentImg>
-                </A.StarBox>
-            </A.CommentListBox>
+                                    <A.CommentProfileName>{props.el.writer}</A.CommentProfileName>
+                                    <A.StarBox>
+                                        <Rate disabled value={props.el.rating} />    
+                                    </A.StarBox> 
+                                </A.StarBox>   
+                                <A.CommentContents >{props.el.contents}</A.CommentContents>
+                            <A.CommentCreateDate>{getDate(props.el.createdAt)}</A.CommentCreateDate>
+                        </A.CommentProfileBox>
+                    </div>
+                    <A.StarBox>
+                        <A.CommentImg onClick={onClickEdit} src="/images/update.png"></A.CommentImg>
+                        <A.CommentImg onClick={onClickOpenDeleteModal} src="/images/clear.png"></A.CommentImg>
+                    </A.StarBox>
+                </A.CommentListBox>
+                ) : (
+                <BoardsCommentWrite isEdit={true} setIsEdit={setIsEdit} el={props.el} />
+            )}
         </>
     )
 }
