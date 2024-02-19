@@ -31,7 +31,7 @@ export default function BoardsCommentItem(props:BoardsCommentItemProps):JSX.Elem
             await deleteBoardComment({
             variables: {
                 password,
-                boardCommentId
+                boardCommentId: props.el._id,
             },
             refetchQueries: [
                 {

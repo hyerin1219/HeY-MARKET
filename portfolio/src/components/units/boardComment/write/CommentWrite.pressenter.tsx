@@ -27,6 +27,7 @@ export default function BoardsCommentWriteUI(props:IBoardsCommentWriteUIProps):J
                     readOnly={props.isEdit}></A.WriterInput>
 
                     <A.WriterInput 
+                    type="password"
                     placeholder="비밀번호" 
                     onChange={props.onChangePassword} 
                     value={props.password}></A.WriterInput>
