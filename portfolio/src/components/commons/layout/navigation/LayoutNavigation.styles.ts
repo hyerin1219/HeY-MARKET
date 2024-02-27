@@ -6,6 +6,7 @@ export const NavigationWrapper = styled.div`
     width: 100%;
     height: 64px;
     background-color: #FFD600;
+    text-align: center;
 `
 export const NaviContents = styled.div`
     display: flex;

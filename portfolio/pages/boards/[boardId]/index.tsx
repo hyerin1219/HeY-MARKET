@@ -2,7 +2,7 @@ import BoardDetail from "../../../src/components/units/boards/detail/BoardsDetai
 import BoardsCommentList from "../../../src/components/units/boardComment/list/BoardsComment.container"
 import BoardsCommentWrite from "../../../src/components/units/boardComment/write/CommentWrite.container"
 
-export default function  BoardDetailPage() {
+export default function  BoardDetailPage():JSX.Element {
 
     return (
         <>
