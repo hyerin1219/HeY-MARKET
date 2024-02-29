@@ -12,4 +12,5 @@ export const DogImg = styled.img`
         width: 30%;
         height: auto;
         margin: 5px;
+        object-fit: cover;
 `
