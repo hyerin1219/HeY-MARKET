@@ -6,7 +6,6 @@ import * as S from './LayoutBanner.styles'
 export default function LayoutBannerUI():JSX.Element {
 
     const settings = {
-        dots: true,
         infinite: true,
         arrow: true,
         speed: 500,
@@ -18,26 +17,22 @@ export default function LayoutBannerUI():JSX.Element {
     return (
         <S.BannerWrap>
                 <Slider {...settings}>
-                <div>
-                        <S.SlideContent>
+                    <S.SlideContent>
                             <S.SlideImg src="/images/image.png"/>
-                        </S.SlideContent>
-                    </div>
-                    <div>
-                        <S.SlideContent>
-                            <S.SlideImg src="/images/image01.png"/>
-                        </S.SlideContent>
-                    </div>
-                    <div>
-                        <S.SlideContent>
-                            <S.SlideImg src="/images/image02.png"/>
-                        </S.SlideContent>
-                    </div>
-                    <div>
-                        <S.SlideContent>
-                            <S.SlideImg src="/images/image03.png"/>
-                        </S.SlideContent>
-                    </div>
+                    </S.SlideContent>
+
+                    <S.SlideContent>
+                        <S.SlideImg src="/images/image01.png"/>
+                    </S.SlideContent>
+                    
+                    <S.SlideContent>
+                        <S.SlideImg src="/images/image02.png"/>
+                    </S.SlideContent>
+
+                    <S.SlideContent>
+                        <S.SlideImg src="/images/image03.png"/>
+                    </S.SlideContent>
+
                 </Slider>
         </S.BannerWrap>
     )

@@ -7,7 +7,6 @@ export const ListWrap = styled.div`
 export const ListBoxWrap = styled.div`
     width: 1200px;
     margin: 0 auto;
-    border-radius: 30px;
     padding: 0 30px;
 `
 
