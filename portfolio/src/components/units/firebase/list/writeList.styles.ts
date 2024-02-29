@@ -19,6 +19,8 @@ export const ListBox = styled.div`
 `
 export const LisContent = styled.div`
     font-size: 16px;
+    width: 250px;
+    text-align: center;
 `
 
 export const WriteButton = styled.button`

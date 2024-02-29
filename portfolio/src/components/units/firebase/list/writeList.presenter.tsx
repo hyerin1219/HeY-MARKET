@@ -14,14 +14,15 @@ export default function WriteListUIPage(props:IWriteListUIPageProps):JSX.Element
                         <A.LisContent>내용</A.LisContent>
                     </A.ListBox>
 
-                    {props.dataBoard?.map((el:any, index:number) => {
+                    {props.dataBoard?.map((el:any, index:number) => (
                         <A.ListBox key={uuidv4()}>
+                            {console.log(el)}
                             <A.LisContent>{index + 1}</A.LisContent>
                             <A.LisContent>{el.writer}</A.LisContent>
                             <A.LisContent>{el.title}</A.LisContent>
                             <A.LisContent>{el.contents}</A.LisContent>
                         </A.ListBox>
-                    })}
+                    ))}
                     
                 </A.ListBoxWrap>
 
