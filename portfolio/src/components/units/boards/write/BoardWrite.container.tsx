@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {  useState } from "react"
 import type {ChangeEvent} from "react"
 import { useMutation } from "@apollo/client"
 import { useRouter } from 'next/router';
@@ -30,6 +30,8 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
     const [isOpen, setIsOpen] = useState(false)
     const [zipcode, setZipcode] = useState("")
     const [address, setAddress] = useState("");
+
+    const [ fileUrls, seFileUrls] = useState(["","",""])
 
     const [createBoard] = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(CREATE_BOARD)
     const [updateBoard] = useMutation<Pick<IMutation,"updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD)
@@ -190,8 +192,9 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         } catch(error) {
             if(error instanceof Error) alert(error.message)
         }
-        }
+    }
         
+    
 
     return (
         <BoardWriteUI 
@@ -215,6 +218,7 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         zipcode={zipcode}
         address={address}
         isOpen={isOpen}
+        fileUrls={fileUrls}
         />
 
     )

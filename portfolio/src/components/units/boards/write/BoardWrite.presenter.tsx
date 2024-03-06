@@ -90,9 +90,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps):JSX.Element {
                 </InputWrap2>    
 
                 <FlexBox2>
-                    <ImgBox></ImgBox>
-                    <ImgBox></ImgBox>
-                    <ImgBox></ImgBox>
+
                 </FlexBox2>
 
                 <InputWrap2>

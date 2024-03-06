@@ -9,6 +9,7 @@ interface ILayoutProps {
 
 export default function Layout(props: ILayoutProps):JSX.Element {
 
+
     return(
         <div style={{width: "1920px"}}>
             <LayoutHeader></LayoutHeader>
