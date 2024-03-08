@@ -7,16 +7,20 @@ export default function Uploads01UI(props: IUploads01UIProps):JSX.Element {
         <>
             <>
                 {props.fileUrl !== "" ? (
-                    <A.ImgBoxImg />
+                    <A.ImgBoxImg 
+                    onClick={props.onClickUpload}
+                    src={`https://storage.googleapis.com/${props.fileUrl}`}
+                />
                 ) : (
-                    <A.ImgBox>
+                    <A.ImgBox onClick={props.onClickUpload}>
                         <>+</>
                         <>Upload</>
                     </A.ImgBox>
                 ) }
                 <A.ImgBoxInput
                     type="file"
-                    ref={}
+                    ref={props.fileRef}
+                    onChange={props.onChangeFile}
                 />
             </>
         </>

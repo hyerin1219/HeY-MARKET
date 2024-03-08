@@ -11,7 +11,14 @@ const FETCH_BOARD = gql`
             contents
             createdAt
             youtubeUrl
+            boardAddress {
+                zipcode
+                address
+                addressDetail
+            }
+            images
         }
+        
     }
 `
 
@@ -19,15 +26,13 @@ const FETCH_BOARD = gql`
 export default function boardsEditPage():JSX.Element {
 
     const router = useRouter()
+    if (typeof router.query.boardId !== "string") return <></>;
 
     const {data} = useQuery(FETCH_BOARD, {
         variables: {
             boardId: router.query.boardId
         }
     })
-
-    console.log(data)
-    
 
     return (
         <BoardWrite 

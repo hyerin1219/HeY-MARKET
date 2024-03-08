@@ -8,8 +8,7 @@ export const ImgBox = styled.div`
     width: 78px;
     height: 78px;
     background-color: #BDBDBD;
-    margin: 0 24px 15px 0;
-    font-size: 25px;
+    margin: 10px;
     font-weight: bold;
     cursor: pointer;
 `
@@ -19,8 +18,9 @@ export const ImgBoxInput = styled.input`
 `
 
 export const ImgBoxImg = styled.img`
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 78px;
+    height: 78px;
     object-fit: cover;
+    margin: 10px;
+    cursor: pointer;
 `

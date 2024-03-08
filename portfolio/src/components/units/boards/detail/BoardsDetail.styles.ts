@@ -128,3 +128,14 @@ export const ListButton2 = styled.button`
 export const YoutubeBox = styled(ReactPlayer)`
     margin: 30px auto;
 `
+export const BoardImageBox = styled.div`
+    display: flex;
+    justify-content: center;
+`
+export const BoardImage = styled.img`
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin: 10px;
+`

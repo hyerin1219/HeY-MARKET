@@ -1,7 +1,8 @@
 
+import Uploads01 from '../../../commons/uploads/01/Uploads01.container';
 import { MainBox, Title,  InputWrap,  InputWrap2,  InputBox,  TextareaBox, AdressBox, AdressBtn, InputTit, FlexBox, FlexBox2, ImgBox, Label, SendBtn, ErrorBox, AddressModal, AddressSearchInput} from './BoardWrite.styles';
 import type { IBoardWriteUIProps } from './BoardWrite.types';
-
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardWriteUI(props:IBoardWriteUIProps):JSX.Element {
 
@@ -90,7 +91,15 @@ export default function BoardWriteUI(props:IBoardWriteUIProps):JSX.Element {
                 </InputWrap2>    
 
                 <FlexBox2>
-
+                    {props.fileUrls.map((el, index) => (
+                        <Uploads01
+                            key={uuidv4()}
+                            index={index}
+                            fileUrl={el}
+                            onChangeFileUrls={props.onChangeFileUrls}
+                        />
+                    ))}
+                    
                 </FlexBox2>
 
                 <InputWrap2>

@@ -27,6 +27,8 @@ export interface IBoardWriteUIProps {
     isOpen: boolean;
     zipcode: string;
     address: string;
+    fileUrls: string[]
+    onChangeFileUrls: (fileUrl: string, index: number) => void
 }
 
 export interface ISubmitButtonProps {

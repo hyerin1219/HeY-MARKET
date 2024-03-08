@@ -1,4 +1,4 @@
-import {  useState } from "react"
+import {  useEffect, useState } from "react"
 import type {ChangeEvent} from "react"
 import { useMutation } from "@apollo/client"
 import { useRouter } from 'next/router';
@@ -107,6 +107,17 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
             setIsActive(false)
         }
     }
+
+    const onChangeFileUrls = (fileUrl: string, index: number): void => {
+        const newFileUrls = [...fileUrls];
+        newFileUrls[index] = fileUrl;
+        seFileUrls(newFileUrls);
+    };
+
+    useEffect(() => {
+        const images = props.data?.fetchBoard.images
+        if(images !== undefined && images !== null) seFileUrls([...images])
+    },[props.data])
     
     const onClickSubmit = async (): Promise<void> => {
         if (!writer) {
@@ -140,12 +151,17 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
                                 zipcode,
                                 address,
                                 addressDetail
-                            }
+                            },
+                            images: [...fileUrls]
                         }
                     }
                     })
                     // console.log(result.data.createBoard._id)
-                    void router.push(`/boards/${result.data?.createBoard._id}`)
+                    if (result.data?.createBoard._id === undefined) {
+                        alert("요청에 문제가 있습니다.");
+                        return;
+                    }
+                void router.push(`/boards/${result.data?.createBoard._id}`)
             } catch(error) {
                 if(error instanceof Error) alert(error.message)
             }
@@ -154,6 +170,10 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
     }
 
     const onClickEdit = async (): Promise<void> => {
+
+        const currentFiles = JSON.stringify(fileUrls)
+        const dafaultFiles = JSON.stringify(props.data?.fetchBoard.images)
+        const isChangedFiles = currentFiles !== dafaultFiles
 
         if(title === "" && contents  === "" && youtubeUrl  === "" && address  === "" && addressDetail  === "" && zipcode  === "") {
             alert("수정한 내용이 없습니다.")
@@ -168,12 +188,13 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
             if(title  !== "") myVariables.title = title
             if(contents  !== "") myVariables.contents = contents
             if(youtubeUrl  !== "") myVariables.youtubeUrl = youtubeUrl
-            if(address  !== "" && addressDetail  === "" && zipcode  === ""){
+            if(address  !== "" && addressDetail  === "" && zipcode  === "" ){
                 myVariables.boardAddress = {}
                 if(zipcode  === "") myVariables.boardAddress.zipcode = zipcode
                 if(address  === "") myVariables.boardAddress.zipcode = address
                 if(addressDetail === "") myVariables.boardAddress.zipcode = addressDetail
             }
+            if (isChangedFiles) myVariables.images = fileUrls
         
         try {
             if(typeof router.query.boardId !== "string") {
@@ -187,12 +208,18 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
                     updateBoardInput: myVariables
                 }
             })
+            if (result.data?.updateBoard._id === undefined) {
+                alert("요청에 문제가 있습니다.");
+                return;
+            }
     
             void router.push(`/boards/${result.data?.updateBoard._id}`)
         } catch(error) {
             if(error instanceof Error) alert(error.message)
         }
     }
+
+    
         
     
 
@@ -219,6 +246,7 @@ export default function BoardWrite(props:IBoardWriteProps): JSX.Element {
         address={address}
         isOpen={isOpen}
         fileUrls={fileUrls}
+        onChangeFileUrls={onChangeFileUrls}
         />
 
     )

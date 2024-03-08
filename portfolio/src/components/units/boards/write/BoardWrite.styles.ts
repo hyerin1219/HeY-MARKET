@@ -130,3 +130,4 @@ export const ErrorBox = styled.div`
 export const AddressModal = styled(Modal)``;
 
 export const AddressSearchInput = styled(DaumPostcode)``;
+
