@@ -2,6 +2,8 @@ import BoardList from "../../src/components/units/boards/list/BoardsList.contain
 
 export default function BoardListPage():JSX.Element {
     return (
-        <BoardList />
+        <>
+            <BoardList />
+        </>
     )
 }

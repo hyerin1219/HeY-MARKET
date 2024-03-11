@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ITextTokenProps } from "./BoardsList.types";
 
 export const MainBox = styled.div`
     width: 1200px;
@@ -74,4 +75,8 @@ export const ButtonImg = styled.img`
     height: 24px;
     object-fit: contain;
     margin-right: 5px;
+`
+
+export const TokenEl = styled.span`
+    color: ${(props: ITextTokenProps) => (props.isMatched ? "red" : "black")};
 `
