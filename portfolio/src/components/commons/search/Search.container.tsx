@@ -9,7 +9,6 @@ export default function SearchPage(props:ISearchPageProps):JSX.Element {
         void props.refetch({search: value, page: 1})
         void props.PageCountRefetch({search: value})
         props.onChangeKeyword(value)
-        console.log(value)
     },500)
 
     const onChangeSearch = (event: ChangeEvent<HTMLInputElement>):void => {
