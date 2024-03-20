@@ -5,9 +5,18 @@ export const Wrap = styled.div`
     display: flex;
     justify-content: space-between;
     width: 1200px;
-    margin: 0 auto;
-    padding-top: 80px;
+    margin: 80px auto;
 `
+export const ProfileWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-right: 3px solid #ddd;
+    padding: 80px 40px;
+`
+
 export const ProfileBox = styled.div`
     display: flex;
     justify-content: center;
@@ -17,6 +26,7 @@ export const ProfileBox = styled.div`
 export const ProfileTitle = styled.div`
     font-size: 24px;
     font-family: #000;
+    font-weight: bold;
 `
 export const ProfileImgBox = styled.div`
     position: relative;
@@ -39,7 +49,9 @@ export const ProfileUpLoadImg = styled.img`
 `
 
 export const ProfileName = styled.p`
+    text-align: center;
     font-size: 24px;
+    font-weight: bold;
 `
 
 export const PointsBox = styled.div`
@@ -68,8 +80,10 @@ export const MyPageMenuImg = styled.img`
     display: inline-block;
     width: 24px;
     height: 24px;
+    margin-right: 10px;
 `
 export const MyPageMenu = styled.p`
-    font-size: 16px;
+    font-size: 18px;
     color: #ddd;
+    font-weight: bold;
 `

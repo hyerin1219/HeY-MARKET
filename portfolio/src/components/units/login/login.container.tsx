@@ -27,20 +27,30 @@ export default function LoginPage():JSX.Element {
 
     const onClickLogin = async ():Promise<void> => {
 
-        const result = await loginUser({
-            variables: {
-                email,
-                password
+        try {
+            const result = await loginUser({
+                variables: {
+                    email,
+                    password
+                }
+            })
+            const accessToken = result.data?.loginUser.accessToken
+            setAccessToken(accessToken)
+            localStorage.setItem("accessToken", accessToken)
+            
+            if(accessToken === undefined) {
+                alert("로그인에 실패했습니다! 다시 시도해 주세요~")
+                return
             }
-        })
-        const accessToken = result.data?.loginUser.accessToken
-        setAccessToken(accessToken)
+            void router.push('/mypages')
 
-        if(accessToken === null) {
-            alert("로그인에 실패했습니다! 다시 시도해 주세요~")
-            return
+        } catch (error) {
+            if(error instanceof Error) alert(error.message)
         }
-        void router.push('./mypage')
+    }
+
+    const onClickSingUp = ():void => {
+        void router.push('/mypages/siginup')
     }
 
     return(
@@ -49,6 +59,7 @@ export default function LoginPage():JSX.Element {
                 onChangEmail={onChangeEmail}
                 onChangePassword={onChangePassword}
                 onClickLogin={onClickLogin}
+                onClickSingUp={onClickSingUp}
             />
         </>
     )

@@ -9,10 +9,20 @@ export default function LayoutHeader():JSX.Element {
         void router.push('/boards')
     }
 
+    const onClickLogin = ():void => {
+        void router.push('/mypages/loginpage')
+    }
+
+    const onClickSignUp = ():void => {
+        void router.push('/mypages/siginup')
+    }
+
     return (
         <>
             <LayoutHeaderUI
             onClickLogo={onClickLogo}
+            onClickLogin={onClickLogin}
+            onClickSignUp={onClickSignUp}
             />
         </>
     )    

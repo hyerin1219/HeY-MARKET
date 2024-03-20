@@ -1,44 +1,45 @@
 import * as A from "./myPage.styles"
+import { IMyPageUIProps } from "./myPage.types"
 
-export default function MyPageUI():JSX.Element {
+export default function MyPageUI(props: IMyPageUIProps):JSX.Element {
     return(
 
         <>
             <A.Wrap>
-                <div>
+                <A.ProfileWrap>
                     <A.ProfileBox>
                         <A.ProfileTitle>MY PAGE</A.ProfileTitle>
                     </A.ProfileBox>
 
                     <A.ProfileImgBox>
-                        <A.ProfileImg src="/images/bigProfile"/>
-                        <A.ProfileUpLoadImg src="/images/profileUpload"/>
+                        <A.ProfileImg src="/images/bigProfile.png"/>
+                        <A.ProfileUpLoadImg src="/images/profileUpload.png"/>
                     </A.ProfileImgBox>
 
-                    <A.ProfileName>dd</A.ProfileName>
+                    <A.ProfileName>{props.data?.fetchUserLoggedIn.name}</A.ProfileName>
 
                     <A.PointsBox>
-                        <A.PointsImg src="/images/ic_savings-24px 2"/>
+                        <A.PointsImg src="/images/ic_savings-24px 2.png"/>
                         <A.PointsNumber>123,000</A.PointsNumber>
                     </A.PointsBox>
 
                     <A.MyPageMenuWrap>
                         <A.MyPageMenuBox>
-                            <A.MyPageMenuImg src="/images/Vector"/>
+                            <A.MyPageMenuImg src="/images/Vector.png"/>
                             <A.MyPageMenu>내 장터</A.MyPageMenu>
                         </A.MyPageMenuBox>
 
                         <A.MyPageMenuBox>
-                            <A.MyPageMenuImg src="/images/pointe"/>
+                            <A.MyPageMenuImg src="/images/pointe.png"/>
                             <A.MyPageMenu>내 포인트</A.MyPageMenu>
                         </A.MyPageMenuBox>
 
                         <A.MyPageMenuBox>
-                            <A.MyPageMenuImg src="/images/profileMini"/>
+                            <A.MyPageMenuImg src="/images/profileMini.png"/>
                             <A.MyPageMenu>내 프로필</A.MyPageMenu>
                         </A.MyPageMenuBox>
                     </A.MyPageMenuWrap>
-                </div>
+                </A.ProfileWrap>
 
             </A.Wrap>
         </>

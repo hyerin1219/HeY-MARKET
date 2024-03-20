@@ -38,3 +38,13 @@ export const HeaderButton = styled.button`
     font-weight: bold;
     cursor: pointer;
 `
+
+export const HeaderProfile = styled.div`
+    width: 92px;
+    height: 44px;
+    text-align: center;
+    line-height: 44px;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+`
