@@ -33,7 +33,7 @@ export default function LayoutHeaderUI(props:ILayoutHeaderUIPros):JSX.Element {
                     :
                     <A.ButtonWrap>
                         <A.HeaderButton onClick={props.onClickLogin}>로그인</A.HeaderButton>
-                        <A.HeaderButton onClick={props.onClickSignUp} style={{backgroundColor: "#FFD600"}}>회원가입</A.HeaderButton>
+                        <A.HeaderButton onClick={props.onClickSignUp} style={{backgroundColor: "#83B871"}}>회원가입</A.HeaderButton>
                     </A.ButtonWrap>
                 }
                 

@@ -1,9 +1,9 @@
-import LoginPage from "../../../src/components/units/login/login.container";
+import LoginPageUI from "../../../src/components/units/login/login.presenter";
 
 export default function MyLoginPage():JSX.Element {
     return (
         <>
-            <LoginPage/>
+            <LoginPageUI/>
         </>
     )
 }

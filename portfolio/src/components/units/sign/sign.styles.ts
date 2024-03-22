@@ -47,7 +47,13 @@ export const SignSubmitButton = styled.button`
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    background-color: #FFD600;
-    border: 2px solid #FFD600;;
-    margin-top: 50px;
+    background-color: #83B871;
+    border: 2px solid #83B871;;
+    margin: 50px auto 0;
+`
+
+export const SignErrorBox = styled.div`
+    height: 25px;
+    color: red;
+    text-align: right;
 `

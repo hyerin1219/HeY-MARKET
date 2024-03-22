@@ -5,7 +5,7 @@ export const NavigationWrapper = styled.div`
     justify-content: center;
     width: 100%;
     height: 64px;
-    background-color: #FFD600;
+    background-color: #83B871;
     text-align: center;
 `
 export const NaviContents = styled.div`
@@ -19,7 +19,7 @@ export const NavigationButton = styled.div`
     width: 148px;
     font-size: 18px;
     font-weight: bold;
-    color: #AB9000;
+    color: #ffffff;
     border: none;
     background-color: transparent ;
     cursor: pointer;

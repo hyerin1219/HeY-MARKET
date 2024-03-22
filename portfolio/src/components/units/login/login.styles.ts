@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 export const LoginWrap = styled.div`
+position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,17 +48,24 @@ export const LoginButton = styled.button`
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    background-color: #FFD600;
-    border: 2px solid #FFD600;;
+    background-color: #83B871;
+    border: 2px solid #83B871;;
     margin-top: 50px;
 `
 
 export const SignUpButton = styled.button`
+    position: absolute;
+    bottom: 170px;
     display: inline-block;
     padding: 5px 10px;
-    margin-top: 30px;
     border: none;
     background-color: transparent;
     border-bottom: 2px solid #000;
     cursor: pointer;
+`
+
+export const LoginErrorBox = styled.div`
+    height: 25px;
+    color: red;
+    text-align: right;
 `

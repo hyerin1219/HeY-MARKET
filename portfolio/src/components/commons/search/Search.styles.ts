@@ -7,7 +7,7 @@ export const SearchWrap = styled.div`
     justify-content: space-between;
 `
 export const SearchInput = styled.input`
-    width: 776px;
+    width: 100%;
     height: 52px;
     padding: 0 10px;
     border-radius: 10px;

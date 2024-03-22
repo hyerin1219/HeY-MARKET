@@ -24,7 +24,7 @@ export const PageButton = styled.img`
 export const PageNumberButton = styled.span`
     display: inline-block;
     margin: 10px;
-    color: ${(props: IPageProps) => (props.isActive ? "blue" : "black")};
+    color: ${(props: IPageProps) => (props.isActive ? "#83B871" : "black")};
     font-weight: ${(props: IPageProps) => (props.isActive ? "bold" : "normal")};
     cursor: pointer;
     

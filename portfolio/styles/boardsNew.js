@@ -87,7 +87,7 @@ export const Label = styled.label`
 export const SendBtn = styled.button`
     width: 178px;
     height: 52px;
-    background-color: #FFD600;
+    background-color: #83B871;
     text-align: center;
     line-height: 52px;
     font-size: 16px;

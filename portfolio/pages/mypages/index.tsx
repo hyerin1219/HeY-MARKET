@@ -1,7 +1,9 @@
-import { LoginCheck } from "../../src/components/commons/hocs"
+import { useLoginCheck } from "../../src/components/commons/hocs"
 import MyPage from "../../src/components/units/myPage/myPage.container"
 
-function MyPages() {
+export default function MyPages() {
+
+    useLoginCheck()
 
     return (
         <>
@@ -9,5 +11,3 @@ function MyPages() {
         </>
     )
 }
-
-export default LoginCheck(MyPages)

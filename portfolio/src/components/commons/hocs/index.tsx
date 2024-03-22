@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 
-export const LoginCheck = (Component: any) => (props: any) => {
+export const useLoginCheck = () => {
 
     const router = useRouter()
     
@@ -12,5 +12,4 @@ export const LoginCheck = (Component: any) => (props: any) => {
         }
     }, [])
     
-    return < Component {...props} />
 }

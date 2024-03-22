@@ -1,9 +1,9 @@
-import MySignUp from "../../../src/components/units/sign/sign.container";
+import MySignUpUI from "../../../src/components/units/sign/sign.presenter";
 
 export default function SignUpPage():JSX.Element {
     return (
         <>
-            <MySignUp/>
+            <MySignUpUI/>
         </>
     )
 }

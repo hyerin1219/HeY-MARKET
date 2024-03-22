@@ -69,7 +69,7 @@ export const LikeImg = styled.img`
 
 export const LikeText =styled.p`
     font-size: 18px;
-    color:#FFD600;
+    color:#83B871;
 `
 
 export const UNLikeText =styled.p`
