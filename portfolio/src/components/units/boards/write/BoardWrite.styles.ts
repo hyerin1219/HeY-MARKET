@@ -67,7 +67,8 @@ export const AdressBtn = styled.button`
 
 export const InputTit = styled.p`
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
+    margin: 10px 0;
 `
 
 export const FlexBox = styled.div`
