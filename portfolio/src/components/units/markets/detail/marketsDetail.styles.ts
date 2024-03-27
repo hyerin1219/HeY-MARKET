@@ -14,7 +14,6 @@ export const CenterBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
 `
 export const FlexBox2 = styled.div`
     display: flex;
@@ -107,4 +106,42 @@ export const BoardImage = styled.img`
     height: 300px;
     object-fit: cover;
     margin: 10px;
+`
+
+export const UsedItemId = styled.div`
+    color: #BDBDBD;
+    font-size: 18px;
+`
+
+export const UsedItemName = styled.div`
+    color: #4F4F4F;
+    font-size: 24px;
+    font-weight: bold;
+`
+
+export const HartImg = styled.img`
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+`
+
+export const HartNum = styled.div`
+    width: 36px;
+    text-align: center;
+`
+
+export const UsedItemPrice = styled.div`
+    font-size: 36px;
+    font-weight: 700;
+    margin: 10px 0;
+`
+
+export const UsedItemContent = styled.div`
+    margin: 30px 0;
+    font-size: 18px;
+`
+
+export const UsedItemTags = styled.div`
+    color: #BDBDBD;
+    font-size: 16px;
 `
