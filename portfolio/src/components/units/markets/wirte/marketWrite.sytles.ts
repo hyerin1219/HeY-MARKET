@@ -19,6 +19,12 @@ export const InputWrap = styled.div`
     width: 100%;
     margin: 30px 0;
 `
+export const TagsWrap = styled.div`
+    height: 50px;
+    margin: 0 0 60px 0;
+
+`
+
 export const InputBox = styled.input`
     box-sizing: border-box;
     width: 100%;

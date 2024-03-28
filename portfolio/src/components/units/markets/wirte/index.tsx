@@ -15,7 +15,6 @@ interface IFormData {
     remarks: string
     contents: string
     price: number
-    tags: string
 }
 
 const CREATE_USED_ITEM = gql`
@@ -106,12 +105,12 @@ export default function MarketWritePageUI() {
 
                     <A.InputWrap >
                         <A.InputTit >태그 입력</A.InputTit>
-                        <A.InputBox type="text" placeholder="태그를 작성해주세요." {...register("tags")}/>
-                        <A.ErrorBox>{formState.errors.tags?.message}</A.ErrorBox>
+                        <A.TagsWrap>
+                            <Tags01/>
+                        </A.TagsWrap>
+                        <A.ErrorBox></A.ErrorBox>
                     </A.InputWrap>
 
-                    <Tags01/>
-                    
                     <A.FlexBox>         
                         {fileUrls.map((el,index) => (
                             <Uploads02
