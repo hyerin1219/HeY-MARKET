@@ -51,7 +51,7 @@ export const YellowImg = styled.img`
 export const Line = styled.div`
     width: 100%;
     height: 1px;
-    margin: 50px 0 100px;
+    margin: 50px 0 50px;
     background-color: #ddd;
 `
 

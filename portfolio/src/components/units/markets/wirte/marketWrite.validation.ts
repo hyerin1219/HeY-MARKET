@@ -24,5 +24,5 @@ export const schema = yup.object({
 
     tags: yup
     .string()
-    .required("태그를 입력해주세요")
+    .required("태그를 입력해주세요"),
 })

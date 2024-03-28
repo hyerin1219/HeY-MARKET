@@ -1,11 +1,12 @@
 import { useQuery } from '@apollo/client'
 import * as A from './marketsDetail.styles'
-import { FETCH_USED_ITEM, FETCH_USER_LOGGED_IN } from './marketDetail.queries'
+import { FETCH_USED_ITEM } from './marketDetail.queries'
 import { IQuery, IQueryFetchUseditemArgs } from '../../../../commons/types/generated/types'
 import { useRouter } from 'next/router'
 import { getDate } from '../../../../commons/libraries/utils'
-import { useForm } from 'react-hook-form'
-import { accessTokensState } from '../../../../commons/stores'
+import Slider01 from '../../../commons/slider/01/slider01'
+import { FETCH_USER_LOGGED_IN } from '../../myPage/myPage.queries'
+
 
 export default function MarketDetailUIPage() {
 
@@ -17,15 +18,16 @@ export default function MarketDetailUIPage() {
         }
     })
 
+    const {data: fetchUserLoggedInData} = useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN)
+
     return(
         <>
             <A.Wrap>
                 <A.CenterBox>
-
                     <A.FlexBox2>
                         <A.ProfileImg src='/images/profile.png'></A.ProfileImg>
                         <A.NameBox>
-                            <A.ProfileName ></A.ProfileName>
+                            <A.ProfileName>{fetchUserLoggedInData?.fetchUserLoggedIn.name}</A.ProfileName>
                             <A.Date>{getDate(data?.fetchUseditem.createdAt)}</A.Date>
                         </A.NameBox>
                     </A.FlexBox2>
@@ -50,6 +52,11 @@ export default function MarketDetailUIPage() {
                 </A.CenterBox>
 
                 <A.UsedItemPrice>{data?.fetchUseditem.price}</A.UsedItemPrice>
+
+                <Slider01
+                    data={data}
+                />
+
                 <A.UsedItemContent>{data?.fetchUseditem.contents}</A.UsedItemContent>
                 <A.UsedItemTags>{data?.fetchUseditem.tags}</A.UsedItemTags>
 

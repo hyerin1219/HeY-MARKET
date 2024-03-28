@@ -10,11 +10,12 @@ export const FETCH_USED_ITEM = gql`
             price
             tags
             createdAt
+            images
         }
     }
 `
 
-export const FETCH_USER_LOGGED_IN = gql`
+const FETCH_USER_LOGGED_IN = gql`
     query {
         fetchUserLoggedIn{
             _id

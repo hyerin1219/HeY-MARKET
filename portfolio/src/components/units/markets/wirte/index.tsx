@@ -5,6 +5,10 @@ import * as A from './marketWrite.sytles'
 import { schema } from "./marketWrite.validation";
 import { IMutation, IMutationCreateUseditemArgs } from "../../../../commons/types/generated/types";
 import { useRouter } from "next/router";
+import Uploads02 from "../../../commons/uploads/02";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import Tags01 from "../../../commons/tags/01";
 
 interface IFormData {
     name: string
@@ -32,6 +36,8 @@ export default function MarketWritePageUI() {
 
     const [createUseditem] = useMutation<Pick<IMutation, "createUseditem">, IMutationCreateUseditemArgs>(CREATE_USED_ITEM)
 
+    const [fileUrls, setFileUrls] = useState(["",""])
+
     const { formState, register, handleSubmit } = useForm<IFormData>({
         resolver: yupResolver(schema),
         mode: "onChange",
@@ -48,7 +54,8 @@ export default function MarketWritePageUI() {
                         remarks: data.remarks,
                         contents: data.contents,
                         price: data.price,
-                        tags: ["#dd"]
+                        tags: ["#dd","#gg","#cc"],
+                        images: fileUrls
                     }
                 }
             })
@@ -59,6 +66,12 @@ export default function MarketWritePageUI() {
             if(error instanceof Error) alert(error.message)
         }
     }
+
+    const onChangeFileUrls = (fileUrl: string, index: number): void => {
+        const newFileUrls = [...fileUrls];
+        newFileUrls[index] = fileUrl;
+        setFileUrls(newFileUrls);
+    };
 
 
     return(
@@ -97,18 +110,17 @@ export default function MarketWritePageUI() {
                         <A.ErrorBox>{formState.errors.tags?.message}</A.ErrorBox>
                     </A.InputWrap>
 
-                    <A.FlexBox>
-                        <A.ImgBox>
-                            + Upload
-                            <A.ImgBoxImg></A.ImgBoxImg>
-                            <A.ImgBoxInput type="file"></A.ImgBoxInput>
-                        </A.ImgBox>
-
-                        <A.ImgBox>
-                            + Upload
-                            <A.ImgBoxImg></A.ImgBoxImg>
-                            <A.ImgBoxInput type="file"></A.ImgBoxInput>
-                        </A.ImgBox>
+                    <Tags01/>
+                    
+                    <A.FlexBox>         
+                        {fileUrls.map((el,index) => (
+                            <Uploads02
+                                key={uuidv4()}
+                                index={index}
+                                fileUrl={el}
+                                onChangeFileUrls={onChangeFileUrls}
+                            />
+                        ))}
                     </A.FlexBox>
 
                     <A.InputWrap>
