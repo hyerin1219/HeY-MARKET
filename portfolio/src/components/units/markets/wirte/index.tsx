@@ -6,7 +6,7 @@ import { schema } from "./marketWrite.validation";
 import { IMutation, IMutationCreateUseditemArgs } from "../../../../commons/types/generated/types";
 import { useRouter } from "next/router";
 import Uploads02 from "../../../commons/uploads/02";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Tags01 from "../../../commons/tags/01";
 
@@ -26,12 +26,16 @@ const CREATE_USED_ITEM = gql`
             contents
             price
             tags
+            seller
         }
     }
 `
 export default function MarketWritePageUI() { 
 
     const router = useRouter()
+
+    const [inputValue, setInputValue] = useState("")
+    const [tags, setTags] = useState<String[]>([])
 
     const [createUseditem] = useMutation<Pick<IMutation, "createUseditem">, IMutationCreateUseditemArgs>(CREATE_USED_ITEM)
 
@@ -53,7 +57,7 @@ export default function MarketWritePageUI() {
                         remarks: data.remarks,
                         contents: data.contents,
                         price: data.price,
-                        tags: ["#dd","#gg","#cc"],
+                        tags,
                         images: fileUrls
                     }
                 }
@@ -71,6 +75,10 @@ export default function MarketWritePageUI() {
         newFileUrls[index] = fileUrl;
         setFileUrls(newFileUrls);
     };
+
+    const onChangeInputValue = (event:ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value)
+    }
 
 
     return(
@@ -106,7 +114,13 @@ export default function MarketWritePageUI() {
                     <A.InputWrap >
                         <A.InputTit >태그 입력</A.InputTit>
                         <A.TagsWrap>
-                            <Tags01/>
+                            <Tags01
+                            onChangeInputValue={onChangeInputValue}
+                            inputValue={inputValue}
+                            setInputValue={setInputValue}
+                            tags={tags}
+                            setTags={setTags}
+                            />
                         </A.TagsWrap>
                         <A.ErrorBox></A.ErrorBox>
                     </A.InputWrap>

@@ -1,28 +1,30 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import type { InputRef } from 'antd';
 import * as A from './tags01.styles'
 
-export default function Tags01():JSX.Element {
+interface ITags01Props {
+    onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
+    inputValue: string
+    setInputValue:  Dispatch<SetStateAction<string>>
+    tags: string[]
+    setTags: Dispatch<SetStateAction<String[]>>
+}
 
-    const [inputValue, setInputValue] = useState("")
+export default function Tags01(props:ITags01Props):JSX.Element {
+
     const inputRef = useRef<InputRef>(null);
-    const [tags, setTags] = useState<String[]>([])
-
-    const onChangeInputValue = (event:ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.target.value)
-    }
 
     const onEnterValue = () => {
-        if (inputValue && tags.indexOf(inputValue) === -1) {
-            setTags([...tags, inputValue]);
+        if (props.inputValue && props.tags.indexOf(props.inputValue) === -1) {
+            props.setTags([...props.tags, "#" + props.inputValue]);
         }
-        setInputValue('');
+        props.setInputValue('');
     }
 
     const removeTag = (index: number) => {
-        const newTags = [...tags];
+        const newTags = [...props.tags];
         newTags.splice(index, 1);
-        setTags(newTags);
+        props.setTags(newTags);
     };
 
 
@@ -31,14 +33,14 @@ export default function Tags01():JSX.Element {
             <A.InputBox
                 type='text'
                 ref={inputRef}
-                value={inputValue}
-                onChange={onChangeInputValue}
+                value={props.inputValue}
+                onChange={props.onChangeInputValue}
                 onPressEnter={onEnterValue}
                 onBlur={onEnterValue}
                 placeholder='태그를 입력해 주세요.'
             />
             {
-                tags.map((el, index) => (
+                props.tags.map((el, index) => (
                     <span key={index}>
                         <A.TagS closable onClose={() => removeTag(index)}>{el}</A.TagS> 
                     </span>

@@ -6,7 +6,7 @@ export const TagS = styled(Tag)`
     background-color: #ddd;
     font-size: 16px;
     padding: 10px;
-    margin: 10px 10px 0 0;
+    margin: 20px;
 `
 
 export const InputWrap = styled.div`

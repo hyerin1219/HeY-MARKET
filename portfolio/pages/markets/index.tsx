@@ -1,4 +1,5 @@
 import { useLoginCheck } from "../../src/components/commons/hocs"
+import MarketListPageUI from "../../src/components/units/markets/list"
 
 export default function MyMarketPage():JSX.Element {
 
@@ -6,7 +7,7 @@ export default function MyMarketPage():JSX.Element {
     
     return (
         <>
-            <div>중고마켓 입니다용</div>
+            <MarketListPageUI/>
         </>
     )
 }

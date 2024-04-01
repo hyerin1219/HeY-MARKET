@@ -61,8 +61,9 @@ export default function MarketDetailUIPage() {
                 <A.UsedItemTags>{data?.fetchUseditem.tags}</A.UsedItemTags>
 
                 <A.ListButtonBox>
-                    <A.ListButton2 >목록으로</A.ListButton2>
-                    <A.ListButton >수정하기</A.ListButton>
+                    <A.ListButton2>수정하기</A.ListButton2>
+                    <A.ListButton>목록으로</A.ListButton>
+                    <A.ListButton2>삭제하기</A.ListButton2>
                 </A.ListButtonBox>
             </A.Wrap>
         </>

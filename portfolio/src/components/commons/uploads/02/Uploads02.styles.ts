@@ -4,7 +4,6 @@ export const FlexBox = styled.div`
 `
 
 export const ImgBox = styled.div`
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,8 +21,8 @@ export const ImgBoxInput = styled.input`
 `
 
 export const ImgBoxImg = styled.img`
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 180px;
+    height: 180px;
     object-fit: cover;
+    margin: 0 24px 15px 0;
 `

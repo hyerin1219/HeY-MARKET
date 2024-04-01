@@ -41,19 +41,23 @@ export default function Uploads02(props:IUploads02Props):JSX.Element {
 
     return(
         <>
-            <A.ImgBox>
-                + Upload
-                <A.ImgBoxImg 
-                onClick={onClickUpload}
-                src={`https://storage.googleapis.com/${props.fileUrl}`}
-                ></A.ImgBoxImg>
 
+            {props.fileUrl !== "" ? (
+                    <A.ImgBoxImg 
+                    onClick={onClickUpload}
+                    src={`https://storage.googleapis.com/${props.fileUrl}`}
+                    ></A.ImgBoxImg>
+                ) : (
+                    <A.ImgBox onClick={onClickUpload}>
+                        <>+</>
+                        <>Upload</>
+                    </A.ImgBox>
+                ) }
                 <A.ImgBoxInput 
                 type="file" 
                 ref={fileRef}
                 onChange={onChangeImgFile}
                 ></A.ImgBoxInput>
-            </A.ImgBox>
         </>
     )
 }

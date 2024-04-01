@@ -21,4 +21,10 @@ export const schema = yup.object({
     .number()
     .positive('양수만 허용됩니다.')
     .required("상품 가격을 입력해주세요."),
+
+    // tags: yup.array().of(
+    //     yup
+    //     .string()
+    //     .required("태그를 입력해주세요.")
+    // )
 })
