@@ -16,6 +16,10 @@ export const FETCH_USED_ITEMS =gql`
             tags
             images
             price
+            seller {
+                _id
+                name
+            }
         } 
     }
 `
@@ -50,7 +54,7 @@ export default function MarketListPageUI():JSX.Element {
                             <A.ItemListProfile>
                                 <A.ItemListProfile>
                                     <A.ItemListProfileImg src='./images/profile.png'/>
-                                    판매자
+                                    {el.seller?.name}
                                 </A.ItemListProfile>
 
                                 <A.ItemListProfile>

@@ -20,8 +20,6 @@ export default function Slider02(props:ISlider02Props):JSX.Element {
         speed: 700
     };
 
-    console.log(props.data)
-
     return (
         <S.BannerWrap>
             <Slider {...settings}>
