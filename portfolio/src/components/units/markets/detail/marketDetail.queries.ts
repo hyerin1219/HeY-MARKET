@@ -11,16 +11,10 @@ export const FETCH_USED_ITEM = gql`
             tags
             createdAt
             images
-        }
-    }
-`
-
-const FETCH_USER_LOGGED_IN = gql`
-    query {
-        fetchUserLoggedIn{
-            _id
-            name
-            email
+            seller {
+                _id
+                name
+            }
         }
     }
 `

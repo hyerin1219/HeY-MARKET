@@ -3,7 +3,6 @@ import styled from "@emotion/styled"
 export const BannerWrap = styled.div`
         width: 180px;
         height: 180px;
-        margin: 20px auto;
     `
 
 
@@ -16,4 +15,9 @@ export const SlideImg = styled.img`
     width: 180px;
     height: 180px;
     object-fit: cover;
+`
+export const SlideBox = styled.div`
+    width: 180px;
+    height: 180px;
+    background-color: #ddd;
 `

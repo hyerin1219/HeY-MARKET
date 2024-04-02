@@ -5,7 +5,6 @@ import { IQuery, IQueryFetchUseditemArgs } from '../../../../commons/types/gener
 import { useRouter } from 'next/router'
 import { getDate } from '../../../../commons/libraries/utils'
 import Slider01 from '../../../commons/slider/01/slider01'
-import { FETCH_USER_LOGGED_IN } from '../../myPage/myPage.queries'
 
 
 export default function MarketDetailUIPage() {
@@ -18,7 +17,6 @@ export default function MarketDetailUIPage() {
         }
     })
 
-    const {data: fetchUserLoggedInData} = useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN)
 
     return(
         <>
@@ -27,7 +25,7 @@ export default function MarketDetailUIPage() {
                     <A.FlexBox2>
                         <A.ProfileImg src='/images/profile.png'></A.ProfileImg>
                         <A.NameBox>
-                            <A.ProfileName>{fetchUserLoggedInData?.fetchUserLoggedIn.name}</A.ProfileName>
+                            <A.ProfileName>{data?.fetchUseditem.seller?.name}</A.ProfileName>
                             <A.Date>{getDate(data?.fetchUseditem.createdAt)}</A.Date>
                         </A.NameBox>
                     </A.FlexBox2>
@@ -47,7 +45,7 @@ export default function MarketDetailUIPage() {
                     </div>
                     <div>
                         <A.HartImg src='/images/heart.png'/>
-                        <A.HartNum>20</A.HartNum>
+                        <A.HartNum>00</A.HartNum>
                     </div>
                 </A.CenterBox>
 

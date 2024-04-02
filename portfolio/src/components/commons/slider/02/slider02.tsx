@@ -26,7 +26,10 @@ export default function Slider02(props:ISlider02Props):JSX.Element {
                 {
                     props.el.map((el:any) => (
                         <S.SlideContent key={el}>
-                            <S.SlideImg src= {`https://storage.googleapis.com/${el}`} />
+                            { el ? 
+                                <S.SlideImg src= {`https://storage.googleapis.com/${el}`} />: 
+                                <S.SlideBox></S.SlideBox> 
+                            }
                         </S.SlideContent>
                     ))
                 }
