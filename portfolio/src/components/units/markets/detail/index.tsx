@@ -1,10 +1,16 @@
-import { useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import * as A from './marketsDetail.styles'
 import { FETCH_USED_ITEM } from './marketDetail.queries'
 import { IQuery, IQueryFetchUseditemArgs } from '../../../../commons/types/generated/types'
 import { useRouter } from 'next/router'
 import { getDate } from '../../../../commons/libraries/utils'
 import Slider01 from '../../../commons/slider/01/slider01'
+
+const DELETE_USED_ITEM = gql`
+    mutation deleteUseditem( $useditemId: ID! ) {
+        deleteUseditem( useditemId : $useditemId)
+    }
+`
 
 
 export default function MarketDetailUIPage() {
@@ -16,6 +22,25 @@ export default function MarketDetailUIPage() {
             useditemId: String(router.query.marketId)
         }
     })
+
+    const [deleteUseditem] = useMutation(DELETE_USED_ITEM)
+
+    const onClickList = ():void => {
+        router.push('../markets')
+    }
+
+    const onDeleteUseditem = async ():Promise<void> => {
+        try {
+            await deleteUseditem({
+                variables: {
+                    useditemId: String(router.query.marketId)
+                }
+            })
+            router.push('../markets')
+        }catch(error) {
+            if(error instanceof Error) alert(error.message)
+        }
+    }
 
 
     return(
@@ -60,8 +85,8 @@ export default function MarketDetailUIPage() {
 
                 <A.ListButtonBox>
                     <A.ListButton2>수정하기</A.ListButton2>
-                    <A.ListButton>목록으로</A.ListButton>
-                    <A.ListButton2>삭제하기</A.ListButton2>
+                    <A.ListButton onClick={onClickList}>목록으로</A.ListButton>
+                    <A.ListButton2 onClick={onDeleteUseditem}>삭제하기</A.ListButton2>
                 </A.ListButtonBox>
             </A.Wrap>
         </>

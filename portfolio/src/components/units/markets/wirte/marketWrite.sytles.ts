@@ -100,6 +100,7 @@ export const Label = styled.label`
 `
 
 export const SendBtn = styled.button`
+    display: block;
     width: 178px;
     height: 52px;
     text-align: center;
@@ -108,6 +109,10 @@ export const SendBtn = styled.button`
     margin: 60px auto 50px;
     border: none;
     cursor: pointer;
+
+    :hover {
+        background-color: #83B871;
+    }
 `
 
 export const ErrorBox = styled.div`

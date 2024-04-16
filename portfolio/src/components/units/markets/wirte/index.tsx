@@ -3,11 +3,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as A from './marketWrite.sytles'
 import { schema } from "./marketWrite.validation";
-import { IMutation, IMutationCreateUseditemArgs } from "../../../../commons/types/generated/types";
+import { IMutation, IMutationCreateUseditemArgs, IMutationUpdateUseditemArgs } from "../../../../commons/types/generated/types";
 import { useRouter } from "next/router";
 import Uploads02 from "../../../commons/uploads/02";
 import { ChangeEvent, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Tags01 from "../../../commons/tags/01";
 
 interface IFormData {
@@ -15,6 +14,10 @@ interface IFormData {
     remarks: string
     contents: string
     price: number
+}
+
+interface IMarketWritePageUIProps {
+    isEdit: boolean
 }
 
 const CREATE_USED_ITEM = gql`
@@ -30,7 +33,22 @@ const CREATE_USED_ITEM = gql`
         }
     }
 `
-export default function MarketWritePageUI() { 
+const UPDATE_USEDITEM = gql`
+    mutation updateUseditem($updateUseditemInput: UpdateUseditemInput!, $useditemId: ID!) {
+        updateUseditem (updateUseditemInput: $updateUseditemInput, useditemId: $useditemId){
+            name
+            remarks
+            contents
+            price
+            tags
+            seller
+        }
+    }
+`
+
+
+
+export default function MarketWritePageUI(props:IMarketWritePageUIProps) { 
 
     const router = useRouter()
 
@@ -38,6 +56,8 @@ export default function MarketWritePageUI() {
     const [tags, setTags] = useState<String[]>([])
 
     const [createUseditem] = useMutation<Pick<IMutation, "createUseditem">, IMutationCreateUseditemArgs>(CREATE_USED_ITEM)
+
+    const [update_useditem] = useMutation<Pick<IMutation,"updateUseditem">,IMutationUpdateUseditemArgs>(UPDATE_USEDITEM)
 
     const [fileUrls, setFileUrls] = useState(["",""])
 
@@ -48,6 +68,7 @@ export default function MarketWritePageUI() {
 
     
     const onClickSubmit = async (data:IFormData):Promise<void> => {
+        
         try {
             const result = await createUseditem({
 
@@ -80,34 +101,75 @@ export default function MarketWritePageUI() {
         setInputValue(event.target.value)
     }
 
+    const onClickMarketEdit = (data:IFormData) => {
+        console.log("수정합니다.")
+        try{
+            const update_reslut = update_useditem({
+                variables: {
+                    updateUseditemInput: {
+                        name: data.name,
+                            remarks: data.remarks,
+                            contents: data.contents,
+                            price: data.price,
+                            tags,
+                            images: fileUrls
+                    },
+                    useditemId: String(router.query.useditemId)
+                }
+            })
+            console.log(update_reslut)
+        }catch(error) {
+            if(error instanceof Error) alert(error.message)
+        }
+    }
+
 
     return(
         <>
             <A.MainBox>
-                <form onSubmit={handleSubmit(onClickSubmit)}>
-                    <A.Title>상품 등록하기</A.Title>
+                <form onSubmit={handleSubmit(props.isEdit ? onClickMarketEdit : onClickSubmit )}>
+                    <A.Title>상품 {props.isEdit ? "수정" : "등록"}하기</A.Title>
                     
                     <A.InputWrap >
                         <A.InputTit>상품명</A.InputTit>
-                        <A.InputBox type="text" placeholder="상품명을 작성해주세요." {...register("name")}/>
+                        <A.InputBox 
+                        type="text" 
+                        placeholder="상품명을 작성해주세요." 
+                        {...register("name")} 
+                        defaultValue={formState.defaultValues?.name ?? ""}
+                        />
                         <A.ErrorBox>{formState.errors.name?.message}</A.ErrorBox>
                     </A.InputWrap>
 
                     <A.InputWrap >
                         <A.InputTit>한줄요약</A.InputTit>
-                        <A.InputBox type="text" placeholder="상품명을 작성해주세요." {...register("remarks")}/>
+                        <A.InputBox 
+                        type="text" 
+                        placeholder="상품명을 작성해주세요." 
+                        {...register("remarks")}
+                        defaultValue={formState.defaultValues?.remarks ?? ""}
+                        />
                         <A.ErrorBox>{formState.errors.remarks?.message}</A.ErrorBox>
                     </A.InputWrap>
 
                     <A.InputWrap >
                         <A.InputTit>상품설명</A.InputTit>
-                        <A.TextareaBox placeholder="상품을 설명해주세요." {...register("contents")}/>
+                        <A.TextareaBox 
+                        placeholder="상품을 설명해주세요." 
+                        {...register("contents")}
+                        defaultValue={formState.defaultValues?.contents ?? ""}
+                        />
                         <A.ErrorBox>{formState.errors.contents?.message}</A.ErrorBox>
                     </A.InputWrap>
 
                     <A.InputWrap >
                         <A.InputTit>판매 가격</A.InputTit>
-                        <A.InputBox2 type="text" placeholder="판매 가격을 입력해주세요." {...register("price")}/>원
+                        <A.InputBox2 
+                        type="text" 
+                        placeholder="판매 가격을 입력해주세요." 
+                        {...register("price")}
+                        defaultValue={formState.defaultValues?.price ?? ""}
+                        />원
                         <A.ErrorBox>{formState.errors.price?.message}</A.ErrorBox>
                     </A.InputWrap>
 
@@ -128,7 +190,7 @@ export default function MarketWritePageUI() {
                     <A.FlexBox>         
                         {fileUrls.map((el,index) => (
                             <Uploads02
-                                key={uuidv4()}
+                                key={index}
                                 index={index}
                                 fileUrl={el}
                                 onChangeFileUrls={onChangeFileUrls}
@@ -151,7 +213,7 @@ export default function MarketWritePageUI() {
                         </A.FlexBox>
                     </A.InputWrap> 
 
-                    <A.SendBtn>등록하기</A.SendBtn>
+                    <A.SendBtn>{props.isEdit ? "수정" : "등록"}하기</A.SendBtn>
                 </form>
             </A.MainBox>
         </>

@@ -5,7 +5,9 @@ export default function MyMarketNewPage():JSX.Element {
     
     return (
         <>
-            <MarketWritePageUI/>
+            <MarketWritePageUI
+                isEdit={false}
+            />
         </>
     )
 }
