@@ -29,16 +29,20 @@ export default function Tags01(props:ITags01Props):JSX.Element {
 
 
     return (
-        <>
-            <A.InputBox
-                type='text'
-                ref={inputRef}
-                value={props.inputValue}
-                onChange={props.onChangeInputValue}
-                // onPressEnter={onEnterValue}
-                onBlur={onEnterValue}
-                placeholder='태그를 입력해 주세요.'
-            />
+            <>
+            <A.InputWrap>
+                <A.InputBox
+                        type='text'
+                        ref={inputRef}
+                        value={props.inputValue}
+                        onChange={props.onChangeInputValue}
+                        defaultValue={props.inputValue}
+                        // onPressEnter={onEnterValue}
+                        onBlur={onEnterValue}
+                        placeholder='태그를 입력해 주세요.'
+                    />
+                    <A.TagsButton type='button' onClick={onEnterValue}>입력</A.TagsButton>
+            </A.InputWrap>
             {
                 props.tags.map((el, index) => (
                     <span key={index}>

@@ -19,8 +19,6 @@ export default function Slider01(props:ISlider01Props):JSX.Element {
         dots: true,
     };
 
-    console.log(props.data)
-
     return (
         <S.BannerWrap>
             <Slider {...settings}>

@@ -42,6 +42,10 @@ export default function MarketDetailUIPage() {
         }
     }
 
+    const onClickUpdateitem = () => {
+        router.push(`../markets/${router.query.marketId}/edit`)
+    }
+
 
     return(
         <>
@@ -84,7 +88,8 @@ export default function MarketDetailUIPage() {
                 <A.UsedItemTags>{data?.fetchUseditem.tags}</A.UsedItemTags>
 
                 <A.ListButtonBox>
-                    <A.ListButton2>수정하기</A.ListButton2>
+
+                    <A.ListButton2 onClick={onClickUpdateitem}>수정하기</A.ListButton2>
                     <A.ListButton onClick={onClickList}>목록으로</A.ListButton>
                     <A.ListButton2 onClick={onDeleteUseditem}>삭제하기</A.ListButton2>
                 </A.ListButtonBox>

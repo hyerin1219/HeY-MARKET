@@ -7,11 +7,11 @@ import { IMutation, IMutationUploadFileArgs } from "../../../../commons/types/ge
 interface IUploads02Props {
     onChangeFileUrls: (fileUrl: string, index: number) => void
     index: number
-    fileUrl: any
+    fileUrl: string
 }
 
 export default function Uploads02(props:IUploads02Props):JSX.Element {
-    const fileRef = useRef(null)
+    const fileRef = useRef<HTMLInputElement>(null)
 
     const [uploadFile] = useMutation<Pick<IMutation, "uploadFile">, IMutationUploadFileArgs>(UPLOAD_FILE)
 
@@ -23,13 +23,13 @@ export default function Uploads02(props:IUploads02Props):JSX.Element {
 
         try {
             const file = event.target.files?.[0]
-
+            
             const result = await uploadFile({
                 variables: {
                     file
                 }
             })
-            props.onChangeFileUrls(result.data?.uploadFile.url, props.index)
+            void props.onChangeFileUrls(result.data?.uploadFile.url ?? "", props.index)
         }catch(error) {
             if(error instanceof Error) {
                 alert(error.message)

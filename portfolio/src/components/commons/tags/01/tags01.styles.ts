@@ -6,16 +6,17 @@ export const TagS = styled(Tag)`
     background-color: #ddd;
     font-size: 16px;
     padding: 10px;
-    margin: 20px;
+    margin: 10px;
 `
 
 export const InputWrap = styled.div`
     width: 100%;
-    margin: 30px 0;
+    margin: 10px 0;
 `
 export const InputBox = styled.input`
+
     box-sizing: border-box;
-    width: 100%;
+    width: 900px;
     border: 1px solid #ddd;
     background-color: #fff;
     padding: 10px;
@@ -23,3 +24,15 @@ export const InputBox = styled.input`
     color: #c4c4c4;
     margin: 10px 0;
 `
+export const TagsButton = styled.button`
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #ddd;
+    margin-left : 20px;
+    border: none;
+    cursor: pointer;
+`
+

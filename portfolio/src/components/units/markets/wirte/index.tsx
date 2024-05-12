@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as A from './marketWrite.sytles'
 import { schema } from "./marketWrite.validation";
-import { IMutation, IMutationCreateUseditemArgs, IMutationUpdateUseditemArgs } from "../../../../commons/types/generated/types";
+import { IMutation, IMutationCreateUseditemArgs, IMutationUpdateUseditemArgs, IQuery } from "../../../../commons/types/generated/types";
 import { useRouter } from "next/router";
 import Uploads02 from "../../../commons/uploads/02";
 import { ChangeEvent, useState } from "react";
@@ -17,7 +17,8 @@ interface IFormData {
 }
 
 interface IMarketWritePageUIProps {
-    isEdit: boolean
+    isEdit: boolean,
+    data?: Pick<IQuery, "fetchUseditem"> | undefined
 }
 
 const CREATE_USED_ITEM = gql`
@@ -29,19 +30,18 @@ const CREATE_USED_ITEM = gql`
             contents
             price
             tags
-            seller
         }
     }
 `
 const UPDATE_USEDITEM = gql`
     mutation updateUseditem($updateUseditemInput: UpdateUseditemInput!, $useditemId: ID!) {
         updateUseditem (updateUseditemInput: $updateUseditemInput, useditemId: $useditemId){
+            _id
             name
             remarks
             contents
             price
             tags
-            seller
         }
     }
 `
@@ -84,7 +84,6 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
                 }
             })
             
-            console.log(result)
             void router.push(`/markets/${result.data?.createUseditem._id}`)
         } catch(error){
             if(error instanceof Error) alert(error.message)
@@ -100,29 +99,29 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
     const onChangeInputValue = (event:ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value)
     }
+    const onClickMarketEdit = async (data:IFormData) => {
 
-    const onClickMarketEdit = (data:IFormData) => {
-        console.log("수정합니다.")
+        if(typeof router.query.marketId !== "string" ) return
+        
         try{
-            const update_reslut = update_useditem({
+            const result = await update_useditem({
                 variables: {
                     updateUseditemInput: {
                         name: data.name,
                             remarks: data.remarks,
                             contents: data.contents,
                             price: data.price,
-                            tags,
+                            // tags,
                             images: fileUrls
                     },
-                    useditemId: String(router.query.useditemId)
+                    useditemId: router.query.marketId
                 }
             })
-            console.log(update_reslut)
+            void router.push(`/markets/${result.data?.updateUseditem._id}`)
         }catch(error) {
             if(error instanceof Error) alert(error.message)
         }
     }
-
 
     return(
         <>
@@ -136,7 +135,7 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
                         type="text" 
                         placeholder="상품명을 작성해주세요." 
                         {...register("name")} 
-                        defaultValue={formState.defaultValues?.name ?? ""}
+                        defaultValue={props.data?.fetchUseditem.name ?? ""}
                         />
                         <A.ErrorBox>{formState.errors.name?.message}</A.ErrorBox>
                     </A.InputWrap>
@@ -147,7 +146,7 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
                         type="text" 
                         placeholder="상품명을 작성해주세요." 
                         {...register("remarks")}
-                        defaultValue={formState.defaultValues?.remarks ?? ""}
+                        defaultValue={props.data?.fetchUseditem.remarks ?? ""}
                         />
                         <A.ErrorBox>{formState.errors.remarks?.message}</A.ErrorBox>
                     </A.InputWrap>
@@ -157,7 +156,7 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
                         <A.TextareaBox 
                         placeholder="상품을 설명해주세요." 
                         {...register("contents")}
-                        defaultValue={formState.defaultValues?.contents ?? ""}
+                        defaultValue={props.data?.fetchUseditem.contents ?? ""}
                         />
                         <A.ErrorBox>{formState.errors.contents?.message}</A.ErrorBox>
                     </A.InputWrap>
@@ -168,7 +167,7 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
                         type="text" 
                         placeholder="판매 가격을 입력해주세요." 
                         {...register("price")}
-                        defaultValue={formState.defaultValues?.price ?? ""}
+                        defaultValue={props.data?.fetchUseditem.price ?? ""}
                         />원
                         <A.ErrorBox>{formState.errors.price?.message}</A.ErrorBox>
                     </A.InputWrap>
@@ -189,6 +188,7 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
 
                     <A.FlexBox>         
                         {fileUrls.map((el,index) => (
+
                             <Uploads02
                                 key={index}
                                 index={index}
@@ -196,6 +196,7 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
                                 onChangeFileUrls={onChangeFileUrls}
                             />
                         ))}
+
                     </A.FlexBox>
 
                     <A.InputWrap>
