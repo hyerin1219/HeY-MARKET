@@ -36,6 +36,7 @@ export default function MarketDetailUIPage() {
                     useditemId: String(router.query.marketId)
                 }
             })
+            alert("게시물 삭제를 완료하였습니다.")
             router.push('../markets')
         }catch(error) {
             if(error instanceof Error) alert(error.message)

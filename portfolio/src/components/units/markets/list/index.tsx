@@ -41,7 +41,7 @@ export default function MarketListPageUI():JSX.Element {
             <A.MainBox>
             {
                 data?.fetchUseditems.map((el) => (
-                    <A.ListWrap onClick={onClickDetail} id={el._id} >
+                    <A.ListWrap onClick={onClickDetail} key={el._id} id={el._id} >
                         <Slider02
                             el={el.images}
                             data={data}

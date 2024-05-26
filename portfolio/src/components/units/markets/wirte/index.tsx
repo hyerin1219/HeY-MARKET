@@ -6,8 +6,9 @@ import { schema } from "./marketWrite.validation";
 import { IMutation, IMutationCreateUseditemArgs, IMutationUpdateUseditemArgs, IQuery } from "../../../../commons/types/generated/types";
 import { useRouter } from "next/router";
 import Uploads02 from "../../../commons/uploads/02";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Tags01 from "../../../commons/tags/01";
+import { FETCH_USED_ITEM } from "../detail/marketDetail.queries";
 
 interface IFormData {
     name: string
@@ -30,6 +31,7 @@ const CREATE_USED_ITEM = gql`
             contents
             price
             tags
+            images
         }
     }
 `
@@ -42,6 +44,7 @@ const UPDATE_USEDITEM = gql`
             contents
             price
             tags
+            images
         }
     }
 `
@@ -78,13 +81,14 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
                         remarks: data.remarks,
                         contents: data.contents,
                         price: data.price,
-                        tags,
-                        images: fileUrls
+                        tags:[...tags],
+                        images: [...fileUrls]
                     }
                 }
             })
-            
+
             void router.push(`/markets/${result.data?.createUseditem._id}`)
+
         } catch(error){
             if(error instanceof Error) alert(error.message)
         }
@@ -96,13 +100,29 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
         setFileUrls(newFileUrls);
     };
 
+    useEffect(() => {
+        const images = props.data?.fetchUseditem.images
+        if(images !== undefined && images !== null) setFileUrls([...images])
+    },[props.data])
+
+    useEffect(() => {
+        const tags = props.data?.fetchUseditem.tags
+        if(tags !== undefined && tags !== null) setTags([...tags])                                                      
+    },[props.data])
+
     const onChangeInputValue = (event:ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value)
     }
     const onClickMarketEdit = async (data:IFormData) => {
+        const currentFiles = JSON.stringify(fileUrls)
+        const dafaultFiles = JSON.stringify(props.data?.fetchUseditem.images)
+        const isChangedFiles = currentFiles !== dafaultFiles
 
         if(typeof router.query.marketId !== "string" ) return
-        
+        // if (isChangedFiles)  {
+        //     alert("똑같다")
+        // }
+
         try{
             const result = await update_useditem({
                 variables: {
@@ -111,16 +131,20 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
                             remarks: data.remarks,
                             contents: data.contents,
                             price: data.price,
-                            // tags,
-                            images: fileUrls
+                            tags: [...tags],
+                            images: [...fileUrls]
                     },
                     useditemId: router.query.marketId
                 }
             })
+    
             void router.push(`/markets/${result.data?.updateUseditem._id}`)
         }catch(error) {
             if(error instanceof Error) alert(error.message)
         }
+
+
+
     }
 
     return(
@@ -181,6 +205,7 @@ export default function MarketWritePageUI(props:IMarketWritePageUIProps) {
                             setInputValue={setInputValue}
                             tags={tags}
                             setTags={setTags}
+
                             />
                         </A.TagsWrap>
                         <A.ErrorBox></A.ErrorBox>

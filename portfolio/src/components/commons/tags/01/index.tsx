@@ -26,7 +26,7 @@ export default function Tags01(props:ITags01Props):JSX.Element {
         newTags.splice(index, 1);
         props.setTags(newTags);
     };
-
+    console.log(props)
 
     return (
             <>
@@ -45,11 +45,13 @@ export default function Tags01(props:ITags01Props):JSX.Element {
             </A.InputWrap>
             {
                 props.tags.map((el, index) => (
-                    <span key={index}>
+                    <span key={index} >
                         <A.TagS closable onClose={() => removeTag(index)}>{el}</A.TagS> 
                     </span>
                 ))
             }
+
+            
         </>
     )
 }

@@ -144,4 +144,5 @@ export const UsedItemContent = styled.div`
 export const UsedItemTags = styled.div`
     color: #BDBDBD;
     font-size: 16px;
+    margin: 0 10px;
 `
