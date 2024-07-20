@@ -1,8 +1,8 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const FETCH_USED_ITEM = gql`
     query fetchUseditem($useditemId: ID!) {
-        fetchUseditem (useditemId: $useditemId) {
+        fetchUseditem(useditemId: $useditemId) {
             _id
             name
             remarks
@@ -15,6 +15,12 @@ export const FETCH_USED_ITEM = gql`
                 _id
                 name
             }
+            useditemAddress {
+                _id
+                zipcode
+                address
+                addressDetail
+            }
         }
     }
-`
+`;
