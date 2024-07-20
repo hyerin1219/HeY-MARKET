@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as A from './marketWrite.sytles';
@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import Uploads02 from '../../../commons/uploads/02';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Tags01 from '../../../commons/tags/01';
-import { FETCH_USED_ITEM } from '../detail/marketDetail.queries';
+
 import type { Address } from 'react-daum-postcode';
 
 interface IFormData {
@@ -113,7 +113,7 @@ export default function MarketWritePageUI(props: IMarketWritePageUIProps) {
         setIsOpen((prev) => !prev);
     };
 
-    const onChangeAddressDetial = (event: any): void => {
+    const onChangeAddressDetail = (event: any): void => {
         setAddressDetail(event.currentTarget.value);
     };
 
@@ -217,14 +217,14 @@ export default function MarketWritePageUI(props: IMarketWritePageUIProps) {
                     </A.FlexBox>
 
                     <A.FlexBox>
-                        <A.AdressBox placeholder="07250" readOnly value={zipcode}></A.AdressBox>
+                        <A.AdressBox placeholder="07250" readOnly value={props.data?.fetchUseditem.useditemAddress?.zipcode ?? ''}></A.AdressBox>
                         <A.AdressBtn type="button" onClick={onClickAddressSearch}>
                             우편번호 검색
                         </A.AdressBtn>
                     </A.FlexBox>
 
-                    <A.InputBox3 readOnly value={address}></A.InputBox3>
-                    <A.InputBox3 onChange={onChangeAddressDetial}></A.InputBox3>
+                    <A.InputBox3 readOnly value={props.data?.fetchUseditem.useditemAddress?.address ?? ''}></A.InputBox3>
+                    <A.InputBox3 onChange={onChangeAddressDetail} value={props.data?.fetchUseditem.useditemAddress?.addressDetail ?? ''}></A.InputBox3>
 
                     <A.InputWrap>
                         <A.InputTit>메인 설정</A.InputTit>
