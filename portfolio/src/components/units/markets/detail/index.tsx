@@ -13,11 +13,15 @@ const DELETE_USED_ITEM = gql`
     }
 `;
 
+
 declare const window: typeof globalThis & {
     kakao: any;
+    IMP: any;
 };
 
+
 export default function MarketDetailUIPage() {
+
     const router = useRouter();
 
     const { data } = useQuery<Pick<IQuery, 'fetchUseditem'>, IQueryFetchUseditemArgs>(FETCH_USED_ITEM, {
@@ -27,7 +31,7 @@ export default function MarketDetailUIPage() {
     });
 
     const userAddress = data?.fetchUseditem?.useditemAddress?.address;
-    console.log(userAddress);
+
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -92,8 +96,45 @@ export default function MarketDetailUIPage() {
         router.push(`../markets/${router.query.marketId}/edit`);
     };
 
+    
+
+    const onClickBuyItem = ():void => {
+        const IMP = window.IMP;
+        IMP.init("imp80516171");
+
+        IMP.request_pay(
+            {
+                // param
+                pg: "kakaopay",
+                pay_method: "card",
+                //   merchant_uid: "ORD20180131-0000011",
+                name: data?.fetchUseditem.name,
+                amount: data?.fetchUseditem.price,
+                buyer_email: data?.fetchUseditem.seller?.email,
+                buyer_name: data?.fetchUseditem.seller?.name,
+                buyer_tel: "000",
+                buyer_addr: data?.fetchUseditem.useditemAddress,
+                buyer_postcode: "01181",
+                m_redirect_url: `http://localhost:3000/markets/${router.query.marketId}`, // 모바일에서는 결제 시, 페이지 주소가 바뀜. 따라서 결제 끝나고 돌아갈 주소 입력해야함.
+            },
+            (rsp: any) => {
+                // callback
+                if (rsp.success === true) {
+                    // 결제 성공 시 로직,
+                    console.log(rsp);
+
+                    //   백엔드에 결제 관련 데이터 넘겨주기 => 즉, 뮤테이션 실행하기
+                    //   createPointTransactionOfLoading
+                } else {
+                    // 결제 실패 시 로직,
+                }
+            }
+        );
+    }
+
     return (
         <>
+            <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
             <A.Wrap>
                 <A.CenterBox>
                     <A.FlexBox2>
@@ -132,11 +173,20 @@ export default function MarketDetailUIPage() {
 
                 <A.MapBox id="map"></A.MapBox>
 
-                <A.ListButtonBox>
-                    <A.ListButton2 onClick={onClickUpdateitem}>수정하기</A.ListButton2>
-                    <A.ListButton onClick={onClickList}>목록으로</A.ListButton>
-                    <A.ListButton2 onClick={onDeleteUseditem}>삭제하기</A.ListButton2>
-                </A.ListButtonBox>
+                {
+                    data?.fetchUseditem._id === data?.fetchUseditem.seller?._id ?
+
+                    <A.ListButtonBox>
+                        <A.ListButton2 onClick={onClickUpdateitem}>수정하기</A.ListButton2>
+                        <A.ListButton onClick={onClickList}>목록으로</A.ListButton>
+                        <A.ListButton2 onClick={onDeleteUseditem}>삭제하기</A.ListButton2>
+                    </A.ListButtonBox>
+                    :
+                    <A.ListButtonBox>
+                        <A.ListButton onClick={onClickList}>목록으로</A.ListButton>
+                        <A.ListButton2 onClick={onClickBuyItem}>구매하기</A.ListButton2>
+                    </A.ListButtonBox>
+                }
             </A.Wrap>
         </>
     );
