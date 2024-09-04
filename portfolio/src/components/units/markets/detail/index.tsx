@@ -126,6 +126,7 @@ export default function MarketDetailUIPage() {
                     //   백엔드에 결제 관련 데이터 넘겨주기 => 즉, 뮤테이션 실행하기
                     //   createPointTransactionOfLoading
                 } else {
+                    console.log("결제 실패:", rsp.error_msg);
                     // 결제 실패 시 로직,
                 }
             }
