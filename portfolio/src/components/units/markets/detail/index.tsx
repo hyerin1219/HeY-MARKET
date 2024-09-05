@@ -113,7 +113,7 @@ export default function MarketDetailUIPage() {
                 buyer_email: data?.fetchUseditem.seller?.email,
                 buyer_name: data?.fetchUseditem.seller?.name,
                 buyer_tel: "000",
-                buyer_addr: data?.fetchUseditem.useditemAddress,
+                buyer_addr: String(data?.fetchUseditem.useditemAddress),
                 buyer_postcode: "01181",
                 m_redirect_url: `http://localhost:3000/markets/${router.query.marketId}`, // 모바일에서는 결제 시, 페이지 주소가 바뀜. 따라서 결제 끝나고 돌아갈 주소 입력해야함.
             },
