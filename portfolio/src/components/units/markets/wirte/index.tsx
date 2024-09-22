@@ -198,8 +198,7 @@ export default function MarketWritePageUI(props: IMarketWritePageUIProps) {
 
                     <A.InputWrap>
                         <A.InputTit>판매 가격</A.InputTit>
-                        <A.InputBox2 type="text" placeholder="판매 가격을 입력해주세요." {...register('price')} defaultValue={props.data?.fetchUseditem.price ?? ''} />원
-                        <A.ErrorBox>{formState.errors.price?.message}</A.ErrorBox>
+                        <A.InputBox2 type="text" placeholder="판매 가격을 입력해주세요." {...register('price')} defaultValue={props.data?.fetchUseditem.price ?? ''} />원<A.ErrorBox>{formState.errors.price?.message}</A.ErrorBox>
                     </A.InputWrap>
 
                     <A.InputWrap>
