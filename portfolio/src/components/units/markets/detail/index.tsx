@@ -109,7 +109,7 @@ export default function MarketDetailUIPage() {
                 buyer_tel: '000',
                 buyer_addr: String(data?.fetchUseditem.useditemAddress),
                 buyer_postcode: '01181',
-                m_redirect_url: `http://localhost:3000/markets/${router.query.marketId}`, // 모바일에서는 결제 시, 페이지 주소가 바뀜. 따라서 결제 끝나고 돌아갈 주소 입력해야함.
+                m_redirect_url: `https://localhost:3000/markets/${router.query.marketId}`, // 모바일에서는 결제 시, 페이지 주소가 바뀜. 따라서 결제 끝나고 돌아갈 주소 입력해야함.
             },
             (rsp: any) => {
                 // callback
@@ -161,7 +161,7 @@ export default function MarketDetailUIPage() {
 
                 <A.UsedItemPrice>{data?.fetchUseditem.price}</A.UsedItemPrice>
 
-                <Slider01 data={data} />
+                {data?.fetchUseditem.images ? <Slider01 data={data} /> : <div></div>}
 
                 <A.UsedItemContent>{data?.fetchUseditem.contents}</A.UsedItemContent>
                 <A.UsedItemTags>{data?.fetchUseditem.tags}</A.UsedItemTags>
