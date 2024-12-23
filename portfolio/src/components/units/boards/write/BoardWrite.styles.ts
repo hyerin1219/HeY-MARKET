@@ -112,7 +112,7 @@ export const Label = styled.label`
 export const SendBtn = styled.button`
     width: 178px;
     height: 52px;
-    background-color: ${(props: ISubmitButtonProps) => props.isActive ? "yellow" : "none"};
+    background-color: ${(props: ISubmitButtonProps) => props.isActive ? "#83B871" : "none"};
     text-align: center;
     line-height: 52px;
     font-size: 16px;
