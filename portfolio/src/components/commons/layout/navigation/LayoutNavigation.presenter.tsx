@@ -4,8 +4,6 @@ import type { ILayoutNavigationUIProps } from './LayoutNavigation.types'
 export default function LayoutNavigationUI(props:ILayoutNavigationUIProps):JSX.Element {
 
     const NAVIGATION_MENUS = [
-        {name: "나의파이어베이스", page:"/myfirebase"},
-        {name: "DOGS", page:"/dogs"},
         {name: "자유게시판", page: "/boards"},
         {name: "중고마켓", page: "/markets"},
         {name: "마이페이지", page: "/mypages"}
