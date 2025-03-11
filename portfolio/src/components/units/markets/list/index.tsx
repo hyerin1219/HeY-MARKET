@@ -58,9 +58,10 @@ export default function MarketListPageUI(): JSX.Element {
     return (
         <>
             <A.MainBox>
+
                 <A.ScrollWrap>
                     <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
-                        {data?.fetchUseditems.map((el) => (
+                        {data?.fetchUseditems?.map((el) => (
                             <A.ListWrap onClick={onClickDetail} key={el._id} id={el._id}>
                                 <Slider02 el={el.images} data={data} />
                                 <A.ItemListBox>
