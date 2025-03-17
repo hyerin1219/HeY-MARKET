@@ -36,7 +36,7 @@ export default function Tags01(props:ITags01Props):JSX.Element {
                         ref={inputRef}
                         value={props.inputValue}
                         onChange={props.onChangeInputValue}
-                        defaultValue={props.inputValue}
+                        // defaultValue={props.inputValue}
                         // onPressEnter={onEnterValue}
                         onBlur={onEnterValue}
                         placeholder='태그를 입력해 주세요.'

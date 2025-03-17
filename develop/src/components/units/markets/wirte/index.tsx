@@ -18,6 +18,7 @@ interface IFormData {
     price: number;
 }
 
+
 interface IMarketWritePageUIProps {
     isEdit: boolean;
     data?: Pick<IQuery, 'fetchUseditem'> | undefined;
