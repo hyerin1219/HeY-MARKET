@@ -3,7 +3,7 @@ import type { IQuery, IQueryFetchBoardsArgs } from "../../../commons/types/gener
 import type { MouseEvent } from "react"
 
 export interface IPaginationUIPageProps {
-    data: Pick<IQuery, "fetchBoards"> | undefined
+    // data: Pick<IQuery, "fetchBoards"> | undefined
     activedPage: number
     lastPage: number
     startPage: number
