@@ -5,15 +5,16 @@ import { useRecoilValueLoadable } from 'recoil';
 
 export const useLoginCheck = ()  => {
     const router = useRouter();
-    const aaa = useRecoilValueLoadable(restoreAccessTokenLoadable);
+    const tokenValue = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
     useEffect(() => {
-        if (aaa.state === 'hasValue') {
-            const newAccessToken = aaa.contents;
+        if (tokenValue.state === 'hasValue') {
+            const newAccessToken = tokenValue.contents;
             if (!newAccessToken) {
                 alert('로그인 후 이용 가능합니다!');
                 void router.push('./mypages/loginpage');
             }
+            
         }
-    }, [aaa.state]); // 상태 변화를 감지하여 실행
+    }, [tokenValue.state]); // 상태 변화를 감지하여 실행
 };
